@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bean:beans
+	xmlns:bean="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+
+http://www.springframework.org/schema/beans/spring-beans.xsd
+
+http://www.springframework.org/schema/security
+
+http://www.springframework.org/schema/security/spring-security.xsd">
+
+ <http auto-config="true">
+		<intercept-url pattern="/" access="permitAll" />
+		<intercept-url pattern="/logout" access="permitAll" />
+		<intercept-url pattern="/contacto"  access="hasAnyAuthority ('CLIENTE')" />
+		<intercept-url pattern="/obtenerCapacitacion" access="hasAnyAuthority ('CLIENTE')" />
+		<intercept-url pattern="/listarUsuarios" access="hasAnyAuthority ('ADMIN')" />
+		
+		
+<!-- 		<access-denied-handler error-page="/404" /> -->
+		<form-login login-page="/login"
+			authentication-failure-url="/error" username-parameter="username"
+			password-parameter="password" />
+		<csrf disabled="true" />
+		<!-- Configuración de logout -->
+		<logout logout-url="/logout"
+			logout-success-url="/logout-success" invalidate-session="true"
+			delete-cookies="JSESSIONID" />
+
+	</http>
+	<authentication-manager>
+		<authentication-provider>
+			<password-encoder hash="bcrypt" />
+			<user-service>
+				<user name="nico"
+					password="$2a$10$lcAWfX1gUOyJxagwcq0R0uEUqp0yKIg.Qg2oLv1DHrC1C1U1EC02u"
+					authorities="CLIENTE" />
+				<user name="bastian"
+					password="$2a$10$lcAWfX1gUOyJxagwcq0R0uEUqp0yKIg.Qg2oLv1DHrC1C1U1EC02u"
+					authorities="ADMIN" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+</bean:beans>
