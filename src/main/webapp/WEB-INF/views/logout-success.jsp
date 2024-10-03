@@ -11,7 +11,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="res/css/estilo.css">
 <!-- Importar script.js -->
-<script src="res/js/script.js"></script>
+<script src="res/js/countdown.js"></script>
 </head>
 <body>
 	<div class="logout-page bg-gradient">
