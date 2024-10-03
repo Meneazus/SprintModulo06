@@ -19,9 +19,9 @@ import cl.grupo02.sprintFinal.repository.UsuarioRepository;
 @Service
 public class UsuarioService {
 
-	@Autowired
+    @Autowired
     private UsuarioRepository usuarioRepository;
-	
+
     // Método para actualizar un usuario existente
     @Transactional
     public Usuario actualizarUsuario(Usuario usuario) {
@@ -39,41 +39,34 @@ public class UsuarioService {
             throw new IllegalArgumentException("El ID del usuario es inválido.");
         }
     }
-    
+
+    // Método para guardar un nuevo usuario (creación)
     @Transactional
     public Usuario guardarUsuario(Usuario usuario) {
-        if (usuario.getIdUsuario() > 0) {
-            // Actualizar el usuario existente
+        if (usuario.getIdUsuario() == 0) {
             return usuarioRepository.save(usuario);
         } else {
-            throw new IllegalArgumentException("No se puede actualizar un usuario sin ID válido.");
+            throw new IllegalArgumentException("No se puede crear un usuario con ID existente.");
         }
     }
 
-    
-	       
-        
-    
-    // Obtener una capacitación por su ID
+    // Obtener un usuario por su ID
     public Optional<Usuario> obtenerUsuarioPorId(int id) {
         return usuarioRepository.findById(id);
     }
-    
-    // Obtener todas las capacitaciones
+
+    // Obtener todos los usuarios
     public List<Usuario> obtenerTodosUsuarios() {
         return usuarioRepository.findAll();
     }
-	
-    // Eliminar una capacitación por su ID
+
+    // Eliminar un usuario por su ID
     public void eliminarUsuario(int id) {
         usuarioRepository.deleteById(id);
     }
-    
-    
+
+    // Obtener usuarios por su tipo (cliente, profesional, administrativo)
     public List<Usuario> obtenerUsuariosPorTipo(String tipoUsuario) {
         return usuarioRepository.findByTipoUsuario(tipoUsuario);
     }
-
-
-	
 }
