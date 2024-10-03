@@ -3,8 +3,11 @@ package cl.grupo02.sprintFinal.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import cl.grupo02.sprintFinal.model.entity.Usuario;
 import cl.grupo02.sprintFinal.model.service.UsuarioService;
 
@@ -13,6 +16,19 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+    
+    
+    // Método para editar un usuario, cargando los datos en un formulario
+    @GetMapping("/editarUsuario")
+    public String editarUsuario(@RequestParam("id") int id, Model model) {
+        Usuario usuario = usuarioService.obtenerUsuarioPorId(id)
+            .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado con ID: " + id));
+        
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("tipoUsuario", usuario.getTipoUsuario());
+
+        return "editarUsuario";  // El nombre del JSP que será cargado
+    }
 
     // Método para manejar la actualización de un usuario
     @PostMapping("/actualizarUsuario")
