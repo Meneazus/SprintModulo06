@@ -7,24 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Usuario</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
-    <style>
-        .form-container {
-            max-width: 600px;
-            margin: 25px auto;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-        }
-        .form-title {
-            text-align: center;
-            margin-bottom: 10px;
-        }
-        .form-label {
-            color: #ffffff;
-        }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="res/css/estilo.css">
+    <script src="res/js/nickname.js"></script>
 </head>
 <body>
 
@@ -86,17 +70,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
-    function generarNickname() {
-        var nombre = document.getElementById('nombreUsuario').value;
-        var apellido = document.getElementById('apellidoUsuario').value;
-
-        if (nombre && apellido) {
-            var nombreUsuario = nombre.charAt(0).toLowerCase() + "_" + apellido.toLowerCase();
-            document.getElementById('nickname').value = nombreUsuario;
-        }
-    }
-</script>
 
 </body>
 </html>

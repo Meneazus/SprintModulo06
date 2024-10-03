@@ -12,28 +12,28 @@ html body {
     font-family: 'Arial', sans-serif;
 } */
 .error-message {
-    background-color: #f8d7da; /* Fondo rojo claro */
-    color: #721c24; /* Texto rojo oscuro */
-    border: 20px solid #f5c6cb; /* Borde rojo */
-    border-radius: 4px; /* Bordes redondeados */
-    padding: 10px; /* Espaciado interno */
-    margin: 5px; /* Margen arriba y abajo */
-    font-size: 20px; /* Tamaño de fuente */
-    align-items: center; 
+	background-color: #f8d7da; /* Fondo rojo claro */
+	color: #721c24; /* Texto rojo oscuro */
+	border: 20px solid #f5c6cb; /* Borde rojo */
+	border-radius: 4px; /* Bordes redondeados */
+	padding: 10px; /* Espaciado interno */
+	margin: 5px; /* Margen arriba y abajo */
+	font-size: 20px; /* Tamaño de fuente */
+	align-items: center;
 }
 
 .error-message strong {
-    margin-right: 0.5rem; /* Espaciado a la derecha del texto fuerte */
+	margin-right: 0.5rem; /* Espaciado a la derecha del texto fuerte */
 }
 
 .alert-info {
-    padding: 15px;
-    margin: 20px;
-    border: 2px solid #b8daff;
-    border-radius: 4px;
-    background-color: #b3d9ff;
-    color: #004085;
-    text-align: center;
+	padding: 15px;
+	margin: 20px;
+	border: 2px solid #b8daff;
+	border-radius: 4px;
+	background-color: #b3d9ff;
+	color: #004085;
+	text-align: center;
 }
 
 .h2 {
@@ -57,19 +57,20 @@ html body {
 }
 
 .logout-page {
-    height: 100vh; /* 'vh-100' traducido a CSS nativo */
-    display: flex; /* 'd-flex' */
-    align-items: center; /* 'align-items-center' */
-    justify-content: center; /* 'justify-content-center' */
-    width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
+	height: 100vh; /* 'vh-100' traducido a CSS nativo */
+	display: flex; /* 'd-flex' */
+	align-items: center; /* 'align-items-center' */
+	justify-content: center; /* 'justify-content-center' */
+	width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
 }
 
 .logout-card {
-    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175); /* 'shadow-lg' equivalente en CSS */
-    background-color: #282828; /* 'bg-dark' de Bootstrap traducido */
-    color: #f8f9fa; /* 'text-light' de Bootstrap traducido */
-    border-radius: 0.25rem; /* 'card' suele tener bordes redondeados */
-    padding: 1.5rem; /* Espacio interno */
+	box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+	/* 'shadow-lg' equivalente en CSS */
+	background-color: #282828; /* 'bg-dark' de Bootstrap traducido */
+	color: #f8f9fa; /* 'text-light' de Bootstrap traducido */
+	border-radius: 0.25rem; /* 'card' suele tener bordes redondeados */
+	padding: 1.5rem; /* Espacio interno */
 }
 
 .btn-primary {
@@ -144,6 +145,23 @@ html body {
 
 .alert.d-none {
 	opacity: 0;
+}
+
+.form-container {
+	max-width: 600px;
+	margin: 25px auto;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.form-title {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.form-label {
+	color: #ffffff;
 }
 
 /* [data-bs-theme="dark"] {

@@ -1,50 +1,100 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="org.springframework.security.core.Authentication"%>
+<%@ page
+	import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@ page import="org.springframework.security.core.GrantedAuthority"%>
 
 <!DOCTYPE html>
 <html lang="es" data-bs-theme="dark">
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="res/css/estilo.css">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="res/css/estilo.css">
 
 </head>
+
+<%
+Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+boolean isCliente = false;
+boolean isAdmin = false;
+
+if (auth != null && auth.isAuthenticated()) {
+	for (GrantedAuthority authority : auth.getAuthorities()) {
+		if (authority.getAuthority().equals("CLIENTE")) {
+	isCliente = true;
+		}
+		if (authority.getAuthority().equals("ADMIN")) {
+	isAdmin = true;
+		}
+	}
+}
+%>
 
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
 
 			<a class="navbar-brand" href="./">Prevención Segura</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-				data-bs-target="#navbarNav" aria-controls="navbarNav"
-				aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false"
+				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
-			
-			
-			
+
+
+
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav ms-auto">
 					<li class="nav-item"><a class="nav-link" aria-current="page"
 						href="./">Inicio</a></li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownListar" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false">Listar</a>
+					<%
+					if (session.getAttribute("SPRING_SECURITY_CONTEXT") != null) {
+					%>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#"
+						id="navbarDropdownListar" role="button" data-bs-toggle="dropdown"
+						aria-expanded="false">Listar</a> <%
+ }
+ %>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdownListar">
-							<li><a class="dropdown-item" href="obtenerCapacitacion">Listar Capacitación</a></li>
-							<li><a class="dropdown-item" href="listarUsuarios">Listar Usuarios</a></li>
+							<%
+							if (isCliente) {
+							%>
+							<li><a class="dropdown-item" href="obtenerCapacitacion">Listar
+									Capacitación</a></li>
+							<%
+							}
+							%>
+							<%
+							if (isAdmin) {
+							%>
+							<li><a class="dropdown-item" href="listarUsuarios">Listar
+									Usuarios</a></li>
+							<%
+							}
+							%>
 
+						</ul></li>
 
-						</ul>
-					</li>
-
+					<!-- Mostrar la opción "Contacto" solo para usuarios con rol CLIENTE -->
+					<%
+					if (isCliente) {
+					%>
 					<li class="nav-item"><a class="nav-link" href="contacto">Contacto</a></li>
+					<%
+					}
+					%>
+					<li class="nav-item"><a class="nav-link"
+						href="crearCapacitacion">Crear Capacitacion</a></li>
+					<li class="nav-item"><a class="nav-link" href="crearUsuario">Crear
+							Usuario</a></li>
+
+					<!-- 			
 				<li class="nav-item"><a class="nav-link" href="crearCapacitacion">Crear Capacitacion</a></li>
-				<li class="nav-item"><a class="nav-link" href="crearUsuario">Crear Usuario</a></li>
-				
-<!-- 			
-				<li class="nav-item"><a class="nav-link" href="crearCapacitacion">Crear Capacitacion</a></li>
- -->		
- 		
-<!-- 					<li class="nav-item dropdown">
+ -->
+
+					<!-- 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCrear" role="button"
 							data-bs-toggle="dropdown" aria-expanded="false">Crear</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdownCrear">
@@ -52,10 +102,10 @@
 							<li><a class="dropdown-item" href="CrearUsuario">Crear Usuario</a></li>
 						</ul>
 					</li> -->
-<!-- 					<li class="nav-item invisible-item">
+					<!-- 					<li class="nav-item invisible-item">
     					<a class="nav-link" href="#">......</a>
 					</li> -->
-<!-- 				<li class="nav-item dropdown">
+					<!-- 				<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownListar" role="button"
 							data-bs-toggle="dropdown" aria-expanded="false">Listar</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdownListar">
@@ -68,15 +118,15 @@
 					%>
 					<!-- Botón de Logout -->
 					<li class="nav-item"><a class="nav-link" href="logout">Logout</a></li>
-				
+
 					<%
 					} else {
 					%>
 					<li class="nav-item"><a class="nav-link" href="login">Login</a></li>
 					<%
 					}
-					%> 
-					
+					%>
+
 
 				</ul>
 			</div>
