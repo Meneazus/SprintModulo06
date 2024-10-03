@@ -6,7 +6,7 @@
 
     <!-- Información del Proyecto -->
     <groupId>cl.grupo02</groupId>
-    <artifactId>grupal08</artifactId>
+    <artifactId>sprintFinal</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
 

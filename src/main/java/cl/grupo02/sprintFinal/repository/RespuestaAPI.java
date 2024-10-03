@@ -1,4 +1,4 @@
-package cl.grupo02.grupal071.model.repository;
+package cl.grupo02.sprintFinal.repository;
 
 import java.time.LocalDateTime;
 

@@ -1,6 +1,6 @@
 <%@ page import="java.util.List"%>
 
-<%@ page import="cl.grupo02.grupal071.model.entity.Capacitacion"%>
+<%@ page import="cl.grupo02.sprintFinal.model.entity.Capacitacion"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 

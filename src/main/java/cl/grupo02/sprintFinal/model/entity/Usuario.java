@@ -1,64 +1,50 @@
-package cl.grupo02.grupal071.model.entity;
+package cl.grupo02.sprintFinal.model.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
-import javax.persistence.JoinColumn;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "usuarios")
 public class Usuario {
 
 	@Id
-	// GeneratedValue se utiliza para hacer que el valor sea autoincremental en la
-	// BD
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idUsuario")
-	private int idUsuario;
-	/* @Column(name = "nombreUsuario") */
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idUsuario;
+
 	private String nombreUsuario;
-	/* @Column(name = "apellidoUsuario") */
 	private String apellidoUsuario;
-	/* @Column(name = "nickname") */
-	/* private String nickname; */
-	/* @Column(name = "runUsuario") */
+	private String nickname;
+	private String contrasena;
 	private String runUsuario;
-	/* @Column(name = "correoUsuario") */
 	private String correoUsuario;
-	/* @Column(name = "telefonoUsuario") */
 	private String telefonoUsuario;
-	/* @Column(name = "contrasena") */
-	/* private String contrasena; */
-	/* @Column(name = "tipoUsuario") */
 	private String tipoUsuario;
-	/* private String username; */
 
-	/*
-	 * private Cliente cliente; private Profesional profesional; private
-	 * Administrativo administrativo;
-	 */
-
-	/*
-	 * @ManyToMany(fetch = FetchType.EAGER)
-	 * 
-	 * @JoinTable(name = "usuariosroles", joinColumns = @JoinColumn(name =
-	 * "usuarioid"), inverseJoinColumns = @JoinColumn(name = "rolid")) private
-	 * Set<Rol> roles = new HashSet<>();
-	 */
 
 	public Usuario() {
 		super();
 	}
+	
+	public Usuario(String nombreUsuario, String apellidoUsuario, String nickname, String contrasena, String runUsuario,
+			String correoUsuario, String telefonoUsuario, String tipoUsuario) {
+		this.nombreUsuario = nombreUsuario;
+		this.apellidoUsuario = apellidoUsuario;
+		this.nickname = nickname;
+		this.contrasena = contrasena;
+		this.runUsuario = runUsuario;
+		this.correoUsuario = correoUsuario;
+		this.telefonoUsuario = telefonoUsuario;
+		this.tipoUsuario = tipoUsuario;
+	}
 
+	
+	
 	public Usuario(int idUsuario, String nombreUsuario, String apellidoUsuario, String runUsuario, String correoUsuario,
 			String telefonoUsuario, String tipoUsuario) {
 		super();
@@ -81,6 +67,22 @@ public class Usuario {
 		this.telefonoUsuario = telefonoUsuario;
 		this.tipoUsuario = tipoUsuario;
 	}
+	
+	
+
+	public Usuario(int idUsuario, String nombreUsuario, String apellidoUsuario, String nickname, String contrasena,
+			String runUsuario, String correoUsuario, String telefonoUsuario, String tipoUsuario) {
+		super();
+		this.idUsuario = idUsuario;
+		this.nombreUsuario = nombreUsuario;
+		this.apellidoUsuario = apellidoUsuario;
+		this.nickname = nickname;
+		this.contrasena = contrasena;
+		this.runUsuario = runUsuario;
+		this.correoUsuario = correoUsuario;
+		this.telefonoUsuario = telefonoUsuario;
+		this.tipoUsuario = tipoUsuario;
+	}
 
 	/*
 	 * public Cliente getCliente() { return cliente; }
@@ -97,9 +99,27 @@ public class Usuario {
 	 * public void setAdministrativo(Administrativo administrativo) {
 	 * this.administrativo = administrativo; }
 	 */
+	
+	
 
 	public int getIdUsuario() {
 		return idUsuario;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getContrasena() {
+		return contrasena;
+	}
+
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 
 	public void setIdUsuario(int idUsuario) {

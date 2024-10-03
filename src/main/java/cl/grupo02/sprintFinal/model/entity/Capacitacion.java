@@ -1,4 +1,4 @@
-package cl.grupo02.grupal071.model.entity;
+package cl.grupo02.sprintFinal.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

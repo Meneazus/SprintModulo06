@@ -1,5 +1,5 @@
 <%@ page import="java.util.List"%>
-<%@ page import="cl.grupo02.grupal071.model.entity.Usuario"%>
+<%@ page import="cl.grupo02.sprintFinal.model.entity.Usuario"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

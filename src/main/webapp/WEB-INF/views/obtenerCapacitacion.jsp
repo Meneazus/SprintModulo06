@@ -1,5 +1,5 @@
 <%@ page import="java.util.List"%>
-<%@ page import="cl.grupo02.grupal071.model.entity.Capacitacion"%>
+<%@ page import="cl.grupo02.sprintFinal.model.entity.Capacitacion"%>
 
 <!DOCTYPE html>
 <html lang="es" data-bs-theme="dark">

@@ -1,4 +1,4 @@
-package cl.grupo02.grupal071.controller;
+package cl.grupo02.sprintFinal.controller;
 
 import java.util.List;
 
@@ -7,10 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import cl.grupo02.grupal071.model.entity.Usuario;
-import cl.grupo02.grupal071.model.service.UsuarioService;
-
-
+import cl.grupo02.sprintFinal.model.entity.Usuario;
+import cl.grupo02.sprintFinal.model.service.UsuarioService;
 
 
 @Controller

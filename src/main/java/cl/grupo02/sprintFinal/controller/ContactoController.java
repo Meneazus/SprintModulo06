@@ -1,4 +1,4 @@
-package cl.grupo02.grupal071.controller;
+package cl.grupo02.sprintFinal.controller;
 
 import javax.servlet.http.HttpServletRequest;
 

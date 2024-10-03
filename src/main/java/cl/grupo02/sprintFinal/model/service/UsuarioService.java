@@ -1,13 +1,15 @@
-package cl.grupo02.grupal071.model.service;
+package cl.grupo02.sprintFinal.model.service;
 
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cl.grupo02.grupal071.model.entity.Usuario;
-import cl.grupo02.grupal071.model.repository.UsuarioRepository;
+import cl.grupo02.sprintFinal.model.entity.Usuario;
+import cl.grupo02.sprintFinal.repository.UsuarioRepository;
 
 
 
@@ -18,6 +20,7 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 	
     // Guardar o Actualizar
+	@Transactional
     public Usuario guardarUsuario(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }

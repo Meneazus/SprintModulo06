@@ -1,4 +1,4 @@
-package cl.grupo02.grupal071.controller;
+package cl.grupo02.sprintFinal.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,7 +30,7 @@ public class HomeController {
      *
      * @return un objeto {@link String} con la respuesta a la solicitud
      */
-    @GetMapping(path = { "/"})
+    @GetMapping(path = {"/"})
     public String paginaInicio(HttpServletRequest request) {
         // Depuración
         logger.info("Solicitud GET: {}", request.getRequestURI());

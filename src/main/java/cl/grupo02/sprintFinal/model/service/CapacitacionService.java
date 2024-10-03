@@ -1,4 +1,4 @@
-package cl.grupo02.grupal071.model.service;
+package cl.grupo02.sprintFinal.model.service;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,8 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import cl.grupo02.grupal071.model.entity.Capacitacion;
-import cl.grupo02.grupal071.model.repository.CapacitacionRepository;
+import cl.grupo02.sprintFinal.model.entity.Capacitacion;
+import cl.grupo02.sprintFinal.repository.CapacitacionRepository;
+
+
+
 
 @Service
 public class CapacitacionService {

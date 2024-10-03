@@ -22,6 +22,7 @@
 
         <!-- Contraseña de Acceso -->
         <property name="password" value="root" />
+        
     </bean>
     
     <!-- Agregar RestTemplate al Proyecto -->
@@ -35,7 +36,7 @@
         <property name="dataSource" ref="dataSource" />
 
         <!-- Especificar qué paquete contiene los modelos -->
-        <property name="packagesToScan" value="cl.grupo02.grupal071.model" />
+        <property name="packagesToScan" value="cl.grupo02.sprintFinal.model" />
 
         <!-- Vendor Adapter -->
         <property name="jpaVendorAdapter">
@@ -53,6 +54,10 @@
 
                 <!-- Usar comentarios SQL. Permite ver los valores utilizados en las consultas -->
                 <prop key="use_sql_comments">true</prop>
+                
+                <!-- Propiedad para actualizar las tablas automáticamente en la base de datos -->
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                
             </props>
         </property>
     </bean>
@@ -63,12 +68,12 @@
     </bean>
 
     <!-- Habilitar la búsqueda de componentes en el proyecto -->
-    <context:component-scan base-package="cl.grupo02.grupal071.model" />
-
+	<context:component-scan base-package="cl.grupo02.sprintFinal.model" />
+	
     <!-- Configuración del Administrador de Transacciones -->
     <tx:annotation-driven transaction-manager="transactionManager" />
 
     <!-- Configuración de los Repositorios -->
-    <jpa:repositories base-package="cl.grupo02.grupal071.model.repository" />
+	<jpa:repositories base-package="cl.grupo02.sprintFinal.repository" />
 
 </beans>

@@ -1,4 +1,4 @@
-package cl.grupo02.grupal071.controller;
+package cl.grupo02.sprintFinal.controller;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-import cl.grupo02.grupal071.model.entity.Capacitacion;
-import cl.grupo02.grupal071.model.service.CapacitacionService;
+import cl.grupo02.sprintFinal.model.entity.Capacitacion;
+import cl.grupo02.sprintFinal.model.service.CapacitacionService;
+
 
 @Controller
 public class CapacitacionController {
