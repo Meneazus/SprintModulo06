@@ -23,8 +23,6 @@ import cl.grupo02.sprintFinal.model.service.UsuarioService;
 public class CrearUsuarioController {
 	
 	@Autowired
-	private UsuarioService usuarioService;
-	@Autowired
 	private ClienteService clienteService;
 	@Autowired
 	private AdministrativoService administrativoService;
@@ -38,11 +36,15 @@ public class CrearUsuarioController {
 	
 	@PostMapping("/crearUsuario")
 	public String crearUsuario(@ModelAttribute FormularioUsuario form) {
-	    ModelAndView modelAndView = new ModelAndView();
 	    
 	    if ("cliente".equals(form.getTipoUsuario())) {
 	        Cliente cliente = new Cliente();
 	        
+			/*
+			 * Acá se pinta los campos en "cliente". JPA los asigna automaticamente a la clase padre (usuarios).
+			 */	
+	        
+	        // Datos correspondientes a la Entidad Usuarios (Tabla Usuarios)
 	        cliente.setNombreUsuario(form.getNombreUsuario());
 	        cliente.setApellidoUsuario(form.getApellidoUsuario());
 	        cliente.setNickname(form.getNickname());
@@ -52,6 +54,7 @@ public class CrearUsuarioController {
 	        cliente.setTelefonoUsuario(form.getTelefonoUsuario());
 	        cliente.setTipoUsuario(form.getTipoUsuario());
 	        
+	        // Datos correspondientes a la Entidad Cliente (Tabla Clientes)
 	        cliente.setNombreEmpresa(form.getNombreEmpresa());
 	        cliente.setRutEmpresa(form.getRutEmpresa());
 	        cliente.setTelefonoEmpresa(form.getTelefonoEmpresa());
@@ -60,36 +63,48 @@ public class CrearUsuarioController {
 	        cliente.setComunaEmpresa(form.getComunaEmpresa());
 	        	        
 	        clienteService.guardarCliente(cliente);
-	        
-	        modelAndView.addObject("mensaje", "Cliente creado exitosamente.");
-	        modelAndView.setViewName("detalleCliente");
-	        
+	               
 	    } else if ("administrativo".equals(form.getTipoUsuario())) {
 	        Administrativo administrativo = new Administrativo();
 	        
+	        // Datos correspondientes a la Entidad Usuarios (Tabla Usuarios)
+	        administrativo.setNombreUsuario(form.getNombreUsuario());
+	        administrativo.setApellidoUsuario(form.getApellidoUsuario());
+	        administrativo.setNickname(form.getNickname());
+	        administrativo.setContrasena(form.getContrasena());
+	        administrativo.setRunUsuario(form.getRunUsuario());
+	        administrativo.setCorreoUsuario(form.getCorreoUsuario());
+	        administrativo.setTelefonoUsuario(form.getTelefonoUsuario());
+	        administrativo.setTipoUsuario(form.getTipoUsuario());
+	        
+	        // Datos correspondientes a la Entidad Administrativo (Tabla Administrativos)
 	        administrativo.setAreaAdministrativo(form.getAreaAdministrativo());
 	        administrativo.setExperienciaPrevia(form.getExperienciaPrevia());
 	        
 	        administrativoService.guardarAdministrativo(administrativo);
-	        
-	        
-	        modelAndView.addObject("mensaje", "Administrativo creado exitosamente.");
-	        modelAndView.setViewName("detalleAdministrativo");
-	        
+	        	        
 	    } else if ("profesional".equals(form.getTipoUsuario())) {
 	        Profesional profesional = new Profesional();
 	        
+	        // Datos correspondientes a la Entidad Usuarios (Tabla Usuarios)
+	        profesional.setNombreUsuario(form.getNombreUsuario());
+	        profesional.setApellidoUsuario(form.getApellidoUsuario());
+	        profesional.setNickname(form.getNickname());
+	        profesional.setContrasena(form.getContrasena());
+	        profesional.setRunUsuario(form.getRunUsuario());
+	        profesional.setCorreoUsuario(form.getCorreoUsuario());
+	        profesional.setTelefonoUsuario(form.getTelefonoUsuario());
+	        profesional.setTipoUsuario(form.getTipoUsuario());
 	        
+	        // Datos correspondientes a la Entidad Profesional (Tabla Profesionales)
 	        profesional.setTituloProfesional(form.getTituloProfesional());
 	        profesional.setFechaIngresoProfesional(form.getFechaIngresoProfesional());
 	        
 	        profesionalService.guardarProfesional(profesional);
 	        
-	        modelAndView.addObject("mensaje", "Profesional creado exitosamente.");
-	        modelAndView.setViewName("detalleProfesional");
 	    }
 
-	    return "redirect:/usuarios";
+	    return "redirect:/crearUsuario";
 	}
 
 

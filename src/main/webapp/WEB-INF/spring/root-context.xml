@@ -22,6 +22,14 @@
 
         <!-- Contraseña de Acceso -->
         <property name="password" value="root" />
+
+		<property name="connectionProperties">
+			<props>
+				<prop key="removeAbandoned">true</prop>
+				<prop key="removeAbandonedTimeout">60</prop> <!-- Tiempo en segundos antes de cerrar conexiones abandonadas -->
+				<prop key="logAbandoned">true</prop> <!-- Para habilitar el registro de conexiones abandonadas -->
+			</props>
+		</property>
         
     </bean>
     

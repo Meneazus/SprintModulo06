@@ -39,7 +39,7 @@ public class CapacitacionController {
         // List<Capacitacion> capacitacionesLocales = capacitacionService.obtenerTodasCapacitaciones();
 
         // Consumir la API para obtener capacitaciones adicionales
-        String apiUrl = "http://localhost:8080/grupal08/api/capacitaciones"; // URL de tu API
+        String apiUrl = "http://localhost:8080/sprintFinal/api/capacitaciones"; // URL de tu API
         ResponseEntity<Capacitacion[]> responseEntity = restTemplate.getForEntity(apiUrl, Capacitacion[].class);
         List<Capacitacion> capacitacionesApi = Arrays.asList(responseEntity.getBody());
 
@@ -75,7 +75,7 @@ public class CapacitacionController {
         modelAndView.addObject("capacitacion", nuevaCapacitacion); // Mantener los datos en el modelo
 
         // Consumir la API desde RestTemplate después de crear la capacitación
-        String apiUrl = "http://localhost:8080/grupal08/api/capacitaciones";
+        String apiUrl = "http://localhost:8080/sprintFinal/api/capacitaciones";
         ResponseEntity<Capacitacion[]> responseEntity = restTemplate.getForEntity(apiUrl, Capacitacion[].class);
         List<Capacitacion> capacitacionesApi = Arrays.asList(responseEntity.getBody());
 

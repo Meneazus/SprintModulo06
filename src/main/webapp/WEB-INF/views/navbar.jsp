@@ -85,34 +85,34 @@ if (auth != null && auth.isAuthenticated()) {
 					<%
 					}
 					%>
-					<li class="nav-item"><a class="nav-link"
-						href="crearCapacitacion">Crear Capacitacion</a></li>
-					<li class="nav-item"><a class="nav-link" href="crearUsuario">Crear
-							Usuario</a></li>
 
-					<!-- 			
-				<li class="nav-item"><a class="nav-link" href="crearCapacitacion">Crear Capacitacion</a></li>
- -->
-
-					<!-- 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCrear" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false">Crear</a>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCrear" role="button" data-bs-toggle="dropdown" aria-expanded="false">Crear</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdownCrear">
-							<li><a class="dropdown-item" href="CrearCapacitacion">Crear Capacitación</a></li>
-							<li><a class="dropdown-item" href="CrearUsuario">Crear Usuario</a></li>
+							<li><a class="dropdown-item" href="crearCapacitacion">Crear Capacitación</a></li>
+							<li><a class="dropdown-item" href="crearUsuario">Crear Usuario</a></li>
 						</ul>
-					</li> -->
-					<!-- 					<li class="nav-item invisible-item">
-    					<a class="nav-link" href="#">......</a>
-					</li> -->
-					<!-- 				<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownListar" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false">Listar</a>
+					</li>
+					
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownEditar" role="button" data-bs-toggle="dropdown" aria-expanded="false">Editar</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdownEditar">
+							<li><a class="dropdown-item" href="editarUsuario">Editar Usuarios</a></li>
+							<li><a class="dropdown-item" href="editarClientes">Editar Clientes</a></li>
+							<li><a class="dropdown-item" href="editarProfesionales">Editar Profesionales</a></li>
+						</ul>
+					</li>
+					
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownListar" role="button" data-bs-toggle="dropdown" aria-expanded="false">Listar</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdownListar">
-							<li><a class="dropdown-item" href="obtenerCapacitacion">Listar Capacitación</a></li>
-							<li><a class="dropdown-item" href="ListarUsuarios">Listar Usuarios</a></li>
+							<li><a class="dropdown-item" href="obtenerCapacitacion">Listar Capacitaciones</a></li>
+							<li><a class="dropdown-item" href="listarUsuarios">Listar Usuarios</a></li>
 						</ul>
-					</li> -->
+					</li>
+				
+					<li class="nav-item invisible-item"> <a class="nav-link" href="#">..............</a></li>
+					
 					<%
 					if (session.getAttribute("SPRING_SECURITY_CONTEXT") != null) {
 					%>
