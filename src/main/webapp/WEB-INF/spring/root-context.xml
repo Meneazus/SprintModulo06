@@ -23,6 +23,10 @@
         <!-- Contraseña de Acceso -->
         <property name="password" value="root" />
     </bean>
+    
+    <!-- Agregar RestTemplate al Proyecto -->
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
+    
 
     <!-- Configuración de JPA -->
     <bean id="entityManagerFactory"

@@ -1,10 +1,13 @@
 package cl.grupo02.grupal071.model.service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import cl.grupo02.grupal071.model.entity.Capacitacion;
 import cl.grupo02.grupal071.model.repository.CapacitacionRepository;
@@ -14,6 +17,9 @@ public class CapacitacionService {
 
 	@Autowired
 	private CapacitacionRepository capacitacionRepository;
+	
+	@Autowired
+	private RestTemplate restTemplate;
 
 	// Guardar o Actualizar
 	public Capacitacion guardarCapacitacion(Capacitacion capacitacion) {
@@ -43,5 +49,11 @@ public class CapacitacionService {
 		}
 		return capacitacionRepository.existsById(capacitacion.getIdCapacitacion());
 	}
+	
+	public List<Capacitacion> obtenerCapacitaciones() {
+        String url = "http://localhost:8080/grupal08/api/capacitaciones";
+        ResponseEntity<Capacitacion[]> response = restTemplate.getForEntity(url, Capacitacion[].class);
+        return Arrays.asList(response.getBody());
+    }
 
 }
