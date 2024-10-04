@@ -4,10 +4,12 @@
 <html>
 <head>
     <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Revisiones</title>
     <link rel="stylesheet" href="<c:url value='/res/css/estilo.css'/>">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="res/css/estilo.css">
 </head>
 <body>
     <!-- Incluir el Navbar -->
@@ -15,7 +17,6 @@
 
     <div class="container mt-4">
         <h1>Lista de Revisiones de Check List</h1>
-        <a href="<c:url value='/crearRevision?idVisita=1'/>" class="btn btn-primary mb-3">Crear Nueva Revisión</a> <!-- Ajusta el idVisita según corresponda -->
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -42,6 +43,9 @@
                 </c:forEach>
             </tbody>
         </table>
+                <div class="d-grid gap-2 d-md-flex justify-content m-3">
+        <a href="<c:url value='/crearRevision?idVisita=1'/>" class="btn btn-outline-light m-3 justify-content">Crear Nueva Revisión</a> <!-- Ajusta el idVisita según corresponda -->
+        </div>
     </div>
 
     <!-- Bootstrap JS y dependencias -->

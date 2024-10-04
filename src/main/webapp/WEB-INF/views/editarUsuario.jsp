@@ -2,12 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Usuario</title>
     <!-- Bootstrap CSS para mejorar el estilo -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="res/css/estilo.css">
+    
 </head>
 <body>
 
@@ -124,9 +127,13 @@
                 </div>
             </c:when>
         </c:choose>
+          <!-- Botón para actualizar el usuario -->
+<div class="d-grid gap-2 d-md-flex justify-content">
+    <input type="submit" value="Actualizar Usuario" class="btn btn-outline-light"/>
+</div>
 
-        <!-- Botón para actualizar el usuario -->
-        <input type="submit" value="Actualizar Usuario" class="btn btn-primary"/>
+
+
     </form>
 </div>
 

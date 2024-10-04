@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cl.grupo02.sprintFinal.model.entity.Capacitacion;
+import cl.grupo02.sprintFinal.model.entity.Cliente;
 import cl.grupo02.sprintFinal.model.service.CapacitacionService;
+import cl.grupo02.sprintFinal.model.service.ClienteService;
 
 /**
  * Controlador para gestionar las capacitaciones.
@@ -31,6 +33,9 @@ public class CapacitacionController {
 
     @Autowired
     private CapacitacionService capacitacionService;
+    
+	@Autowired
+	private ClienteService clienteService;
 
     /**
      * Lista todas las capacitaciones.
@@ -57,6 +62,8 @@ public class CapacitacionController {
      */
     @GetMapping("/nueva")
     public String mostrarFormularioCreacion(Model model) {
+    	List<Cliente> clientes = clienteService.obtenerTodosClientes();
+    	model.addAttribute("clientes", clientes);
         model.addAttribute("capacitacion", new Capacitacion());
         return "crearCapacitacion";
     }

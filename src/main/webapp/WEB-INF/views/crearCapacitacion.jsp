@@ -1,5 +1,6 @@
 <%@ page import="java.util.List"%>
 <%@ page import="cl.grupo02.sprintFinal.model.entity.Capacitacion"%>
+<%@ page import="cl.grupo02.sprintFinal.model.entity.Cliente"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -12,6 +13,7 @@
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/estilo.css">
+     <script src="res/js/capacitacion.js"></script>
 </head>
 <body>
 
@@ -49,9 +51,20 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="rutEmpresa" class="form-label">RUT de la Empresa</label>
-                        <input type="text" class="form-control" id="rutEmpresa" name="rutEmpresa" value="${capacitacion.rutEmpresa}" required pattern="\d{7,8}-[kK\d]">
-                        <div class="invalid-feedback">Por favor, ingresa un RUT válido.</div>
+                     <label for="rutEmpresa" class="form-label">RUT de la Empresa</label>
+                    <select class="form-select" id="rutEmpresa" name="rutEmpresa" required>
+                        <option value="" disabled selected>Seleccione una empresa...</option>
+                        <%
+                        List<Cliente> clientes = (List<Cliente>) request.getAttribute("clientes");
+                        if (clientes != null) {
+                            for (Cliente c : clientes) {
+                        %>
+                        <option value="<%= c.getRutEmpresa() %>"><%= c.getRutEmpresa() %> - <%= c.getNombreEmpresa() %></option>
+                        <%
+                            }
+                        }
+                        %>
+						</select>
                     </div>
 
                     <!-- Botón de envío -->
@@ -72,28 +85,5 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-        // Validación personalizada o scripts adicionales si los necesitas
-        // Ejemplo de validación Bootstrap
-        (function () {
-            'use strict'
-
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.querySelectorAll('form')
-
-            // Loop over them and prevent submission
-            Array.prototype.slice.call(forms)
-                .forEach(function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                        }
-
-                        form.classList.add('was-validated')
-                    }, false)
-                })
-        })()
-    </script>
 </body>
 </html>

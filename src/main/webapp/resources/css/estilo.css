@@ -121,10 +121,11 @@ html body {
 	border-radius: 12px; /* Bordes redondeados */
 	background-color: transparent; /* Fondo transparente */
 	color: #e0e0e0; /* Texto blanco */
-	padding: 10px 20px; /* Ajuste del padding interno */
+	padding: 20px 25px; /* Ajuste del padding interno */
 	font-size: 18px; /* Tamaño del texto */
 	font-weight: 400; /* Texto más grueso */
 	text-align: center; /* Centrar el texto */
+	align-items: center;
 	margin-top: 15px;
 	display: inline-block;
 	cursor: pointer; /* Mostrar el puntero cuando se pasa el ratón */

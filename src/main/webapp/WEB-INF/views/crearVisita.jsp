@@ -3,9 +3,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Visita</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="res/css/estilo.css">
 </head>
 <body>
     <!-- Incluir el Navbar -->
@@ -81,7 +83,7 @@
             </div>
 
             <!-- Botones -->
-            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="submit" class="btn btn-outline-light">Guardar</button>
             <br>
             <a href="${pageContext.request.contextPath}/obtenerVisita" class="btn btn-secondary">Cancelar</a>
         </form>
