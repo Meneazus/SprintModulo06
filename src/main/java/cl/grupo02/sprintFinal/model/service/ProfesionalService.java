@@ -5,34 +5,50 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cl.grupo02.sprintFinal.model.entity.Profesional;
+import cl.grupo02.sprintFinal.model.entity.Usuario;
 import cl.grupo02.sprintFinal.repository.ProfesionalRepository;
 
 @Service
 public class ProfesionalService {
 
-	@Autowired
-    private ProfesionalRepository ProfesionalRepository;
-	
-    // Guardar o Actualizar
+    @Autowired
+    private ProfesionalRepository profesionalRepository;
+    
+    @Transactional
     public Profesional guardarProfesional(Profesional profesional) {
-        return ProfesionalRepository.save(profesional);
+        return profesionalRepository.save(profesional);
     }
     
-    // Obtener una capacitación por su ID
-    public Optional<Profesional> obtenerProfesionalnPorId(int id) {
-        return ProfesionalRepository.findById(id);
+    @Transactional
+    public Profesional actualizarProfesional(Profesional profesional) {
+        if (profesionalRepository.existsById(profesional.getIdProfesional())) {
+            return profesionalRepository.save(profesional);
+        } else {
+            throw new IllegalArgumentException("No se puede actualizar un cliente inexistente.");
+        }
     }
     
-    // Obtener todas las capacitaciones
-    public List<Profesional> obtenerTodosProfesionals() {
-        return ProfesionalRepository.findAll();
+    public Profesional obtenerProfesionalPorUsuario(Usuario usuario) {
+        return profesionalRepository.findByUsuario(usuario);
     }
-	
-    // Eliminar una capacitación por su ID
+    
+    
+
+    @Transactional(readOnly = true)
+    public Optional<Profesional> obtenerProfesionalPorId(int id) {
+        return profesionalRepository.findById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Profesional> obtenerTodosProfesionales() {
+        return profesionalRepository.findAll();
+    }
+
+    @Transactional
     public void eliminarProfesional(int id) {
-        ProfesionalRepository.deleteById(id);
+        profesionalRepository.deleteById(id);
     }
-	
 }

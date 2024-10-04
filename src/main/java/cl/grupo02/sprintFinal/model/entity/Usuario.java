@@ -1,77 +1,49 @@
 package cl.grupo02.sprintFinal.model.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
+import java.io.Serializable;
+
+import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "usuarios")
-public class Usuario {
+public class Usuario implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idUsuario;
+    private Integer idUsuario;
 
-	private String nombreUsuario;
-	private String apellidoUsuario;
-	private String nickname;
-	private String contrasena;
-	private String runUsuario;
-	private String correoUsuario;
-	private String telefonoUsuario;
-	private String tipoUsuario;
+    private String nombreUsuario;
+    private String apellidoUsuario;
+    private String nickname;
+    private String contrasena;
+    private String runUsuario;
+    private String correoUsuario;
+    private String telefonoUsuario;
+    private String tipoUsuario;
 
+    // Relaciones uno a uno con las entidades hijas
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private Cliente cliente;
+
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private Profesional profesional;
+
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private Administrativo administrativo;
 
 	public Usuario() {
 		super();
-	}
-	
-	public Usuario(String nombreUsuario, String apellidoUsuario, String nickname, String contrasena, String runUsuario,
-			String correoUsuario, String telefonoUsuario, String tipoUsuario) {
-		this.nombreUsuario = nombreUsuario;
-		this.apellidoUsuario = apellidoUsuario;
-		this.nickname = nickname;
-		this.contrasena = contrasena;
-		this.runUsuario = runUsuario;
-		this.correoUsuario = correoUsuario;
-		this.telefonoUsuario = telefonoUsuario;
-		this.tipoUsuario = tipoUsuario;
+		// TODO Auto-generated constructor stub
 	}
 
-	
-	
-	public Usuario(int idUsuario, String nombreUsuario, String apellidoUsuario, String runUsuario, String correoUsuario,
-			String telefonoUsuario, String tipoUsuario) {
-		super();
-		this.idUsuario = idUsuario;
-		this.nombreUsuario = nombreUsuario;
-		this.apellidoUsuario = apellidoUsuario;
-		this.runUsuario = runUsuario;
-		this.correoUsuario = correoUsuario;
-		this.telefonoUsuario = telefonoUsuario;
-		this.tipoUsuario = tipoUsuario;
-	}
-
-	public Usuario(String nombreUsuario, String apellidoUsuario, String runUsuario, String correoUsuario,
-			String telefonoUsuario, String tipoUsuario) {
-		super();
-		this.nombreUsuario = nombreUsuario;
-		this.apellidoUsuario = apellidoUsuario;
-		this.runUsuario = runUsuario;
-		this.correoUsuario = correoUsuario;
-		this.telefonoUsuario = telefonoUsuario;
-		this.tipoUsuario = tipoUsuario;
-	}
-	
-	
-
-	public Usuario(int idUsuario, String nombreUsuario, String apellidoUsuario, String nickname, String contrasena,
-			String runUsuario, String correoUsuario, String telefonoUsuario, String tipoUsuario) {
+	public Usuario(Integer idUsuario, String nombreUsuario, String apellidoUsuario, String nickname, String contrasena,
+			String runUsuario, String correoUsuario, String telefonoUsuario, String tipoUsuario, Cliente cliente,
+			Profesional profesional, Administrativo administrativo) {
 		super();
 		this.idUsuario = idUsuario;
 		this.nombreUsuario = nombreUsuario;
@@ -82,47 +54,16 @@ public class Usuario {
 		this.correoUsuario = correoUsuario;
 		this.telefonoUsuario = telefonoUsuario;
 		this.tipoUsuario = tipoUsuario;
+		this.cliente = cliente;
+		this.profesional = profesional;
+		this.administrativo = administrativo;
 	}
 
-	/*
-	 * public Cliente getCliente() { return cliente; }
-	 * 
-	 * public void setCliente(Cliente cliente) { this.cliente = cliente; }
-	 * 
-	 * public Profesional getProfesional() { return profesional; }
-	 * 
-	 * public void setProfesional(Profesional profesional) { this.profesional =
-	 * profesional; }
-	 * 
-	 * public Administrativo getAdministrativo() { return administrativo; }
-	 * 
-	 * public void setAdministrativo(Administrativo administrativo) {
-	 * this.administrativo = administrativo; }
-	 */
-	
-	
-
-	public int getIdUsuario() {
+	public Integer getIdUsuario() {
 		return idUsuario;
 	}
 
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
-	public String getContrasena() {
-		return contrasena;
-	}
-
-	public void setContrasena(String contrasena) {
-		this.contrasena = contrasena;
-	}
-
-	public void setIdUsuario(int idUsuario) {
+	public void setIdUsuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 
@@ -140,6 +81,22 @@ public class Usuario {
 
 	public void setApellidoUsuario(String apellidoUsuario) {
 		this.apellidoUsuario = apellidoUsuario;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getContrasena() {
+		return contrasena;
+	}
+
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 
 	public String getRunUsuario() {
@@ -174,4 +131,28 @@ public class Usuario {
 		this.tipoUsuario = tipoUsuario;
 	}
 
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public Profesional getProfesional() {
+		return profesional;
+	}
+
+	public void setProfesional(Profesional profesional) {
+		this.profesional = profesional;
+	}
+
+	public Administrativo getAdministrativo() {
+		return administrativo;
+	}
+
+	public void setAdministrativo(Administrativo administrativo) {
+		this.administrativo = administrativo;
+	}
+  
 }

@@ -73,16 +73,47 @@ html body {
 	padding: 1.5rem; /* Espacio interno */
 }
 
+
 .btn-primary {
-	background-color: #6200ea; /* Color de fondo del botón */
-	border-color: #6200ea; /* Color de borde del botón */
+	border: 1px solid #e0e0e0; /* Borde blanco */
+	border-radius: 12px; /* Bordes redondeados */
+	background-color: transparent; /* Fondo transparente */
+	color: #e0e0e0; /* Texto blanco */
+	/* padding: 10px 20px;  *//* Ajuste del padding interno */
+	font-size: 18px; /* Tamaño del texto */
+	font-weight: 400; /* Texto más grueso */
+	text-align: center; /* Centrar el texto */
+	margin-top: 15px;
+	display: inline-block;
+	cursor: pointer; /* Mostrar el puntero cuando se pasa el ratón */
+	transition: all 0.3s ease; /* Transición para efectos suaves */
 }
 
 .btn-primary:hover {
-	background-color: #3700b3;
-	/* Color de fondo del botón al pasar el cursor */
-	border-color: #3700b3;
-	/* Color de borde del botón al pasar el cursor */
+	background-color: white; /* Fondo blanco al pasar el ratón */
+	color: black; /* Texto negro al pasar el ratón */
+	border-color: black;
+	
+}
+
+
+.btn-primary2 {
+	border: 1px solid #e0e0e0; /* Borde blanco */
+	border-radius: 10px; /* Bordes redondeados */
+	background-color: transparent; /* Fondo transparente */
+	color: #e0e0e0; /* Texto blanco */
+	font-size: 12px; /* Tamaño del texto */
+	font-weight: 400; /* Texto más grueso */
+	text-align: center; /* Centrar el texto */
+	cursor: pointer; /* Mostrar el puntero cuando se pasa el ratón */
+	transition: all 0.3s ease; /* Transición para efectos suaves */
+}
+
+.btn-primary2:hover {
+	background-color: white; /* Fondo blanco al pasar el ratón */
+	color: black; /* Texto negro al pasar el ratón */
+	border-color: black;
+	
 }
 
 .btn-outline-light {
@@ -92,7 +123,7 @@ html body {
 	color: #e0e0e0; /* Texto blanco */
 	padding: 10px 20px; /* Ajuste del padding interno */
 	font-size: 18px; /* Tamaño del texto */
-	font-weight: 600; /* Texto más grueso */
+	font-weight: 400; /* Texto más grueso */
 	text-align: center; /* Centrar el texto */
 	margin-top: 15px;
 	display: inline-block;
@@ -164,12 +195,16 @@ html body {
 	color: #ffffff;
 }
 
-/* [data-bs-theme="dark"] {
-    background-color: rgb(192, 192, 192);
-    color: #fff;
+/* Clase personalizada para un margen más pequeño entre botones */
+.btn-custom {
+    margin-right: 5px;
 }
 
-[data-bs-theme="light"] {
-    background-color: #fff;
-    color: #000;
-} */
+/* Asegurar que los botones tienen la misma altura */
+.btn {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+

@@ -1,15 +1,10 @@
-<%@ page import="java.util.List"%>
-<%@ page import="cl.grupo02.sprintFinal.model.entity.Usuario"%>
-<%@ page import="cl.grupo02.sprintFinal.model.entity.Cliente"%>
-<%@ page import="cl.grupo02.sprintFinal.model.entity.Profesional"%>
-<%@ page import="cl.grupo02.sprintFinal.model.entity.Administrativo"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="es" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Usuarios</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -25,130 +20,100 @@
         <form method="get" class="mb-4">
             <label for="tipoUsuario" class="form-label">Filtrar por tipo de usuario:</label>
             <select id="tipoUsuario" name="tipoUsuario" class="form-select" onchange="this.form.submit()">
-                <option value="" <%= (request.getParameter("tipoUsuario") == null) ? "selected" : "" %>>Seleccionar...</option>
-                <option value="cliente" <%= "cliente".equals(request.getParameter("tipoUsuario")) ? "selected" : "" %>>Cliente</option>
-                <option value="profesional" <%= "profesional".equals(request.getParameter("tipoUsuario")) ? "selected" : "" %>>Profesional</option>
-                <option value="administrativo" <%= "administrativo".equals(request.getParameter("tipoUsuario")) ? "selected" : "" %>>Administrativo</option>
+                <option value="" ${empty tipoUsuario ? 'selected' : ''}>Seleccionar...</option>
+                <option value="cliente" ${tipoUsuario == 'cliente' ? 'selected' : ''}>Cliente</option>
+                <option value="profesional" ${tipoUsuario == 'profesional' ? 'selected' : ''}>Profesional</option>
+                <option value="administrativo" ${tipoUsuario == 'administrativo' ? 'selected' : ''}>Administrativo</option>
             </select>
         </form>
 
         <!-- Mostrar mensaje si no se selecciona un tipo de usuario -->
-        <%
-        String tipoUsuario = request.getParameter("tipoUsuario");
-        if (tipoUsuario == null || tipoUsuario.isEmpty()) {
-        %>
-            <div class="alert alert-info">Debe seleccionar un tipo de usuario primero.</div>
-        <%
-        } else {
-            List<Usuario> usuarios = (List<Usuario>) request.getAttribute("usuarios");
-            if (usuarios != null && !usuarios.isEmpty()) {
-        %>
-        <!-- Tabla con los usuarios -->
-        <table class="table table-bordered table-striped">
-            <thead class="table-dark">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>RUN</th>
-                    <th>Correo</th>
-                    <th>Teléfono</th>
-                    <th>Tipo Usuario</th>
+        <c:choose>
+            <c:when test="${empty tipoUsuario}">
+                <div class="alert alert-info">Debe seleccionar un tipo de usuario primero.</div>
+            </c:when>
+            <c:otherwise>
+                <c:if test="${not empty usuarios}">
+                    <!-- Tabla con los usuarios -->
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>RUN</th>
+                                <th>Correo</th>
+                                <th>Teléfono</th>
+                                <!-- Mostrar encabezados adicionales según el tipo de usuario -->
+                                <c:choose>
+                                    <c:when test="${tipoUsuario == 'cliente'}">
+                                        <th>Nombre Empresa</th>
+                                        <th>RUT Empresa</th>
+                                        <th>Teléfono Empresa</th>
+                                        <th>Correo Empresa</th>
+                                        <th>Dirección Empresa</th>
+                                        <th>Comuna Empresa</th>
+                                    </c:when>
+                                    <c:when test="${tipoUsuario == 'profesional'}">
+                                        <th>Título Profesional</th>
+                                        <th>Fecha Ingreso</th>
+                                    </c:when>
+                                    <c:when test="${tipoUsuario == 'administrativo'}">
+                                        <th>Área Administrativo</th>
+                                        <th>Experiencia Previa</th>
+                                    </c:when>
+                                </c:choose>
+                                <th>Acciones</th> <!-- Nueva columna para las acciones -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="u" items="${usuarios}">
+                                <tr style="font-size: 80%;">
+                                    <td>${u.nombreUsuario}</td>
+                                    <td>${u.apellidoUsuario}</td>
+                                    <td>${u.runUsuario}</td>
+                                    <td>${u.correoUsuario}</td>
+                                    <td>${u.telefonoUsuario}</td>
 
-                    <!-- Mostrar encabezados adicionales según el tipo de usuario -->
-                    <%
-                    if ("cliente".equals(tipoUsuario)) {
-                    %>
-                        <th>Nombre Empresa</th>
-                        <th>Rut Empresa</th>
-                        <th>Teléfono Empresa</th>
-                        <th>Correo Empresa</th>
-                        <th>Dirección Empresa</th>
-                        <th>Comuna Empresa</th>
-                    <%
-                    } else if ("profesional".equals(tipoUsuario)) {
-                    %>
-                        <th>Título Profesional</th>
-                        <th>Fecha Ingreso</th>
-                    <%
-                    } else if ("administrativo".equals(tipoUsuario)) {
-                    %>
-                        <th>Área Administrativo</th>
-                        <th>Experiencia Previa</th>
-                    <%
-                    }
-                    %>
-                    <th>Acciones</th> <!-- Nueva columna para las acciones -->
-                </tr>
-            </thead>
-            <tbody>
-                <%
-                for (Usuario u : usuarios) {
-                    if (u.getTipoUsuario().equalsIgnoreCase(tipoUsuario)) {
-                %>
-                <tr style="font-size: 80%;">
-                    <td><%=u.getNombreUsuario()%></td>
-                    <td><%=u.getApellidoUsuario()%></td>
-                    <td><%=u.getRunUsuario()%></td>
-                    <td><%=u.getCorreoUsuario()%></td>
-                    <td><%=u.getTelefonoUsuario()%></td>
-                    <td style="text-transform: uppercase"><%=u.getTipoUsuario()%></td>
+                                    <!-- Mostrar datos adicionales según tipo de usuario -->
+                                    <c:choose>
+                                        <c:when test="${tipoUsuario == 'cliente'}">
+                                            <td>${u.cliente.nombreEmpresa}</td>
+                                            <td>${u.cliente.rutEmpresa}</td>
+                                            <td>${u.cliente.telefonoEmpresa}</td>
+                                            <td>${u.cliente.correoEmpresa}</td>
+                                            <td>${u.cliente.direccionEmpresa}</td>
+                                            <td>${u.cliente.comunaEmpresa}</td>
+                                        </c:when>
+                                        <c:when test="${tipoUsuario == 'profesional'}">
+                                            <td>${u.profesional.tituloProfesional}</td>
+                                            <td>${u.profesional.fechaIngresoProfesional}</td>
+                                        </c:when>
+                                        <c:when test="${tipoUsuario == 'administrativo'}">
+                                            <td>${u.administrativo.areaAdministrativo}</td>
+                                            <td>${u.administrativo.experienciaPrevia}</td>
+                                        </c:when>
+                                    </c:choose>
 
-                    <!-- Mostrar datos adicionales según tipo de usuario -->
-                    <%
-                    if ("cliente".equals(u.getTipoUsuario()) && u instanceof Cliente) {
-                    Cliente cliente = (Cliente) u;
-                    %>
-                        <td><%= cliente.getNombreEmpresa() %></td>
-                        <td><%= cliente.getRutEmpresa() %></td>
-                        <td><%= cliente.getTelefonoEmpresa() %></td>
-                        <td><%= cliente.getCorreoEmpresa() %></td>
-                        <td><%= cliente.getDireccionEmpresa() %></td>
-                        <td><%= cliente.getComunaEmpresa() %></td>
-                    <%
-                    } else if ("profesional".equals(u.getTipoUsuario()) && u instanceof Profesional) {
-                    Profesional profesional = (Profesional) u;
-                    %>
-                        <td><%= profesional.getTituloProfesional() %></td>
-                        <td><%= profesional.getFechaIngresoProfesional() %></td>
-                    <%
-                    } else if ("administrativo".equals(u.getTipoUsuario()) && u instanceof Administrativo) {
-                    Administrativo administrativo = (Administrativo) u;
-                    %>
-                        <td><%= administrativo.getAreaAdministrativo() %></td>
-                        <td><%= administrativo.getExperienciaPrevia() %></td>
-                    <%
-                    }
-                    %>
+                                    <!-- Columna de acciones -->
+                                    <td>
+                                        <!-- Enlace para modificar -->
+                                        <a href="${pageContext.request.contextPath}/usuarios/${u.idUsuario}/editar" class="btn btn-warning btn-sm">Modificar</a>
 
-                    <!-- Columna de acciones -->
-                    <td>
-                        <!-- Formulario para modificar -->
-                        <form action="editarUsuario" method="get" style="display:inline;">
-                            <input type="hidden" name="id" value="<%= u.getIdUsuario() %>">
-                            <button type="submit" class="btn btn-warning">Modificar</button>
-                        </form>
-
-                        <!-- Formulario para eliminar -->
-                        <form action="eliminarUsuario" method="post" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
-                            <input type="hidden" name="id" value="<%= u.getIdUsuario() %>">
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
-                <%
-                    }
-                }
-                %>
-            </tbody>
-        </table>
-        <%
-            } else {
-        %>
-            <div class="alert alert-warning">No hay usuarios disponibles para mostrar.</div>
-        <%
-            }
-        }
-        %>
+                                        <!-- Formulario para eliminar -->
+                                        <form action="${pageContext.request.contextPath}/usuarios/${u.idUsuario}/eliminar" method="post" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
+                                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </c:if>
+                <c:if test="${empty usuarios}">
+                    <div class="alert alert-warning">No hay usuarios disponibles para mostrar.</div>
+                </c:if>
+            </c:otherwise>
+        </c:choose>
     </div>
 
     <%@ include file='footer.jsp'%>

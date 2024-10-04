@@ -1,89 +1,122 @@
 package cl.grupo02.sprintFinal.controller;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cl.grupo02.sprintFinal.model.entity.Capacitacion;
 import cl.grupo02.sprintFinal.model.service.CapacitacionService;
 
-
 @Controller
+@RequestMapping("/capacitaciones")
 public class CapacitacionController {
 
     @Autowired
     private CapacitacionService capacitacionService;
 
-    @Autowired
-    private RestTemplate restTemplate; // Inyección de RestTemplate
-
-    private static final Logger logger = LogManager.getLogger(CapacitacionController.class);
-
-    // Mostrar lista de capacitaciones (obtenidas desde la base de datos y la API)
-    @GetMapping("/obtenerCapacitacion")
+    // Listar capacitaciones
+    @GetMapping
     public String listarCapacitaciones(Model model) {
-        // Obtener capacitaciones locales desde la base de datos
-        // List<Capacitacion> capacitacionesLocales = capacitacionService.obtenerTodasCapacitaciones();
+        // Obtener capacitaciones desde la base de datos
+        List<Capacitacion> capacitaciones = capacitacionService.obtenerTodasCapacitaciones();
 
-        // Consumir la API para obtener capacitaciones adicionales
-        String apiUrl = "http://localhost:8080/sprintFinal/api/capacitaciones"; // URL de tu API
-        ResponseEntity<Capacitacion[]> responseEntity = restTemplate.getForEntity(apiUrl, Capacitacion[].class);
-        List<Capacitacion> capacitacionesApi = Arrays.asList(responseEntity.getBody());
+        // Agregar la lista al modelo
+        model.addAttribute("capacitaciones", capacitaciones);
 
-        // Agregar ambas listas al modelo
-        // model.addAttribute("capacitacionesLocales", capacitacionesLocales);
-        model.addAttribute("capacitacionesApi", capacitacionesApi);
-
-        return "obtenerCapacitacion"; // Retorna la vista 'obtenerCapacitacion.jsp'
+        return "listarCapacitaciones"; // Asegúrate de que esta vista existe
     }
 
-    // Mostrar formulario para crear una capacitación
-    @GetMapping(path = { "/crearCapacitacion" })
-    public String mostrarCrearCapacitacion(HttpServletRequest request, Model model) {
-        logger.info("Solicitud GET: {}", request.getRequestURI());
-        model.addAttribute("capacitacion", new Capacitacion()); // Añadir un nuevo objeto capacitación al modelo
-        return "crearCapacitacion"; // Retorna la vista del formulario para crear una capacitación
+    // Mostrar formulario para crear una nueva capacitación
+    @GetMapping("/nueva")
+    public String mostrarFormularioCreacion(Model model) {
+        model.addAttribute("capacitacion", new Capacitacion());
+        return "crearCapacitacion";
     }
 
     // Procesar la creación de una nueva capacitación
-    @PostMapping(path = { "/crearCapacitacion" })
-    public ModelAndView crearCapacitacion(@ModelAttribute("capacitacion") Capacitacion capacitacion) {
-        // Guardar la capacitación en la base de datos
-        Capacitacion nuevaCapacitacion = capacitacionService.guardarCapacitacion(capacitacion);
+    @PostMapping
+    public String crearCapacitacion(@Valid @ModelAttribute("capacitacion") Capacitacion capacitacion,
+                                    BindingResult result,
+                                    RedirectAttributes redirectAttributes,
+                                    Model model) {
+        if (result.hasErrors()) {
+            return "crearCapacitacion";
+        }
 
-        // Crear el objeto ModelAndView para configurar la respuesta y vista
-        ModelAndView modelAndView = new ModelAndView("crearCapacitacion");
+        try {
+            capacitacionService.guardarCapacitacion(capacitacion);
+            redirectAttributes.addFlashAttribute("mensaje", "Capacitación creada exitosamente.");
 
-        // Configurar un mensaje de éxito
-        String mensaje = capacitacionService.isNew(capacitacion) ? "Capacitación creada exitosamente."
-                : "Capacitación actualizada exitosamente.";
+            return "redirect:/capacitaciones";
+        } catch (Exception e) {
+            model.addAttribute("error", "Ocurrió un error al crear la capacitación: " + e.getMessage());
+            return "crearCapacitacion";
+        }
+    }
 
-        modelAndView.addObject("mensaje", mensaje); // Añadir el mensaje al modelo
-        modelAndView.addObject("capacitacion", nuevaCapacitacion); // Mantener los datos en el modelo
+    // Mostrar detalles de una capacitación (Opcional)
+    @GetMapping("/{id}")
+    public String verCapacitacion(@PathVariable("id") Integer id, Model model) {
+        Optional<Capacitacion> optionalCapacitacion = capacitacionService.obtenerCapacitacionPorId(id);
+        if (!optionalCapacitacion.isPresent()) {
+            model.addAttribute("error", "Capacitación no encontrada.");
+            return "redirect:/capacitaciones";
+        }
+        model.addAttribute("capacitacion", optionalCapacitacion.get());
+        return "verCapacitacion"; // Crea este JSP si lo deseas
+    }
 
-        // Consumir la API desde RestTemplate después de crear la capacitación
-        String apiUrl = "http://localhost:8080/sprintFinal/api/capacitaciones";
-        ResponseEntity<Capacitacion[]> responseEntity = restTemplate.getForEntity(apiUrl, Capacitacion[].class);
-        List<Capacitacion> capacitacionesApi = Arrays.asList(responseEntity.getBody());
+    // Eliminar capacitación
+    @GetMapping("/{id}/eliminar")
+    public String eliminarCapacitacion(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
+        try {
+            capacitacionService.eliminarCapacitacion(id);
+            redirectAttributes.addFlashAttribute("mensaje", "Capacitación eliminada exitosamente.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Error al eliminar la capacitación: " + e.getMessage());
+        }
+        return "redirect:/capacitaciones";
+    }
 
-        // Añadir la lista de capacitaciones obtenida de la API al modelo
-        modelAndView.addObject("capacitacionesApi", capacitacionesApi);
+    // Editar capacitación
+    @GetMapping("/{id}/editar")
+    public String mostrarFormularioEdicion(@PathVariable("id") Integer id, Model model) {
+        Optional<Capacitacion> optionalCapacitacion = capacitacionService.obtenerCapacitacionPorId(id);
+        if (!optionalCapacitacion.isPresent()) {
+            model.addAttribute("error", "Capacitación no encontrada.");
+            return "redirect:/capacitaciones";
+        }
+        model.addAttribute("capacitacion", optionalCapacitacion.get());
+        return "editarCapacitacion"; // Crea este JSP si lo deseas
+    }
 
-        // Redirigir a la vista que lista las capacitaciones
-        
-        return new ModelAndView("redirect:/obtenerCapacitacion");
+    @PostMapping("/{id}/editar")
+    public String editarCapacitacion(@PathVariable("id") Integer id,
+                                     @Valid @ModelAttribute("capacitacion") Capacitacion capacitacion,
+                                     BindingResult result,
+                                     RedirectAttributes redirectAttributes,
+                                     Model model) {
+        if (result.hasErrors()) {
+            return "editarCapacitacion";
+        }
+
+        try {
+            capacitacion.setIdCapacitacion(id); // Asegurarse de que el ID es correcto
+            capacitacionService.guardarCapacitacion(capacitacion);
+            redirectAttributes.addFlashAttribute("mensaje", "Capacitación actualizada exitosamente.");
+
+            return "redirect:/capacitaciones";
+        } catch (Exception e) {
+            model.addAttribute("error", "Ocurrió un error al actualizar la capacitación: " + e.getMessage());
+            return "editarCapacitacion";
+        }
     }
 }

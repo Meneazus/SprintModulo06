@@ -1,102 +1,131 @@
 package cl.grupo02.sprintFinal.model.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "clientes")
-public class Cliente extends Usuario {
+public class Cliente implements Serializable {
 
-	/*
-	 * @Id
-	 * 
-	 * @GeneratedValue(strategy = GenerationType.IDENTITY) private int idCliente; //
-	 * Clave primaria en la tabla clientes
-	 */
+    private static final long serialVersionUID = 1L;
 
-	private String nombreEmpresa;
-	private String rutEmpresa;
-	private String telefonoEmpresa;
-	private String correoEmpresa;
-	private String direccionEmpresa;
-	private String comunaEmpresa;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idCliente")
+    private int idCliente;
 
-	public Cliente() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idUsuario", nullable = false)
+    private Usuario usuario;
 
-	public Cliente(String nombreEmpresa, String rutEmpresa, String telefonoEmpresa, String correoEmpresa,
-			String direccionEmpresa, String comunaEmpresa) {
-		super();
+    @Column(name = "nombreEmpresa", length = 50, nullable = false)
+    private String nombreEmpresa;
 
-		this.nombreEmpresa = nombreEmpresa;
-		this.rutEmpresa = rutEmpresa;
-		this.telefonoEmpresa = telefonoEmpresa;
-		this.correoEmpresa = correoEmpresa;
-		this.direccionEmpresa = direccionEmpresa;
-		this.comunaEmpresa = comunaEmpresa;
-	}
+    @Column(name = "rutEmpresa", length = 20, unique = true, nullable = false)
+    private String rutEmpresa;
 
-	public Cliente(String nombreUsuario, String apellidoUsuario, String nickname, String contrasena, String runUsuario,
-			String correoUsuario, String telefonoUsuario, String tipoUsuario, String nombreEmpresa, String rutEmpresa,
-			String telefonoEmpresa, String correoEmpresa, String direccionEmpresa, String comunaEmpresa) {
-		super(nombreUsuario, apellidoUsuario, nickname, contrasena, runUsuario, correoUsuario, telefonoUsuario,
-				tipoUsuario);
-		this.nombreEmpresa = nombreEmpresa;
-		this.rutEmpresa = rutEmpresa;
-		this.telefonoEmpresa = telefonoEmpresa;
-		this.correoEmpresa = correoEmpresa;
-		this.direccionEmpresa = direccionEmpresa;
-		this.comunaEmpresa = comunaEmpresa;
-	}
+    @Column(name = "telefonoEmpresa", length = 20)
+    private String telefonoEmpresa;
 
-	public String getNombreEmpresa() {
-		return nombreEmpresa;
-	}
+    @Column(name = "correoEmpresa", length = 50)
+    private String correoEmpresa;
 
-	public void setNombreEmpresa(String nombreEmpresa) {
-		this.nombreEmpresa = nombreEmpresa;
-	}
+    @Column(name = "direccionEmpresa", length = 100)
+    private String direccionEmpresa;
 
-	public String getRutEmpresa() {
-		return rutEmpresa;
-	}
+    @Column(name = "comunaEmpresa", length = 50)
+    private String comunaEmpresa;
 
-	public void setRutEmpresa(String rutEmpresa) {
-		this.rutEmpresa = rutEmpresa;
-	}
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Visita> visitas;
 
-	public String getTelefonoEmpresa() {
-		return telefonoEmpresa;
-	}
+    // Constructores
+    public Cliente() {
+    }
 
-	public void setTelefonoEmpresa(String telefonoEmpresa) {
-		this.telefonoEmpresa = telefonoEmpresa;
-	}
+    public Cliente(Usuario usuario, String nombreEmpresa, String rutEmpresa, String telefonoEmpresa,
+                  String correoEmpresa, String direccionEmpresa, String comunaEmpresa) {
+        this.usuario = usuario;
+        this.nombreEmpresa = nombreEmpresa;
+        this.rutEmpresa = rutEmpresa;
+        this.telefonoEmpresa = telefonoEmpresa;
+        this.correoEmpresa = correoEmpresa;
+        this.direccionEmpresa = direccionEmpresa;
+        this.comunaEmpresa = comunaEmpresa;
+    }
 
-	public String getCorreoEmpresa() {
-		return correoEmpresa;
-	}
+    // Getters y Setters
 
-	public void setCorreoEmpresa(String correoEmpresa) {
-		this.correoEmpresa = correoEmpresa;
-	}
+    public int getIdCliente() {
+        return idCliente;
+    }
 
-	public String getDireccionEmpresa() {
-		return direccionEmpresa;
-	}
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
 
-	public void setDireccionEmpresa(String direccionEmpresa) {
-		this.direccionEmpresa = direccionEmpresa;
-	}
+    public Usuario getUsuario() {
+        return usuario;
+    }
 
-	public String getComunaEmpresa() {
-		return comunaEmpresa;
-	}
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
-	public void setComunaEmpresa(String comunaEmpresa) {
-		this.comunaEmpresa = comunaEmpresa;
-	}
+    public String getNombreEmpresa() {
+        return nombreEmpresa;
+    }
 
+    public void setNombreEmpresa(String nombreEmpresa) {
+        this.nombreEmpresa = nombreEmpresa;
+    }
+
+    public String getRutEmpresa() {
+        return rutEmpresa;
+    }
+
+    public void setRutEmpresa(String rutEmpresa) {
+        this.rutEmpresa = rutEmpresa;
+    }
+
+    public String getTelefonoEmpresa() {
+        return telefonoEmpresa;
+    }
+
+    public void setTelefonoEmpresa(String telefonoEmpresa) {
+        this.telefonoEmpresa = telefonoEmpresa;
+    }
+
+    public String getCorreoEmpresa() {
+        return correoEmpresa;
+    }
+
+    public void setCorreoEmpresa(String correoEmpresa) {
+        this.correoEmpresa = correoEmpresa;
+    }
+
+    public String getDireccionEmpresa() {
+        return direccionEmpresa;
+    }
+
+    public void setDireccionEmpresa(String direccionEmpresa) {
+        this.direccionEmpresa = direccionEmpresa;
+    }
+
+    public String getComunaEmpresa() {
+        return comunaEmpresa;
+    }
+
+    public void setComunaEmpresa(String comunaEmpresa) {
+        this.comunaEmpresa = comunaEmpresa;
+    }
+
+    public List<Visita> getVisitas() {
+        return visitas;
+    }
+
+    public void setVisitas(List<Visita> visitas) {
+        this.visitas = visitas;
+    }
 }
