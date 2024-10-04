@@ -24,8 +24,14 @@ import cl.grupo02.sprintFinal.repository.UsuarioRepository;
 @Service
 public class UsuarioService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+	@Autowired
+	private UsuarioRepository usuarioRepository;
+
+    public Usuario findByNickname(String nickname) {
+        return usuarioRepository.findByNickname(nickname);
+    }
+	
+	// Método para actualizar un usuario existente
 
     /**
      * Actualiza un usuario existente.
