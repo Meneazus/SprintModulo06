@@ -75,19 +75,59 @@ muchas empresas se encuentran en zonas donde no hay conexión de ese tipo.
 
 ## 4. ESTRUCTURA DEL PROYECTO
 
-**Inicio:** Página de inicio del proyecto con una vista general.
+Aquí te dejo una estructura del proyecto basada en los puntos que mencionaste:
 
+## 4. ESTRUCTURA DEL PROYECTO
 
-**Formulario de contacto:** Ingreso de datos correo electrónico, nombre, asunto y mensaje para el despliegue en consola de Java.
+### **Inicio:**
+- **Descripción**: Página principal del sistema, que actúa como el punto de entrada para los usuarios. Muestra una vista general del sistema y acceso a las funcionalidades principales.
+- **Funcionalidades**:
+  - Enlaces a las diferentes secciones del sistema.
+  - Bienvenida personalizada si el usuario está autenticado.
 
+### **Formulario de contacto:**
+- **Descripción**: Formulario simple donde los usuarios pueden enviar consultas o mensajes.
+- **Campos**:
+  - Nombre
+  - Correo electrónico
+  - Asunto
+  - Mensaje
+- **Funcionalidad**:
+  - Al enviar el formulario, los datos se despliegan en la consola de Java para depuración o simulación de envíos.
+  
+### **Gestión de Capacitaciones:**
+- **Descripción**: Módulo encargado de la creación, visualización y edición de capacitaciones para los clientes.
+- **Funcionalidades**:
+  - **Crear Capacitación**: Formulario para crear una nueva capacitación, ingresando el nombre de la capacitación y un detalle general.
+  - **Listar Capacitación**: Página para listar todas las capacitaciones creadas.
+  - **Editar Capacitación**: Opción para modificar capacitaciones existentes.
 
-**Gestión de Capacitaciones:** Creación y gestión de capacitaciones para los clientes, con información del nombre y un detalle generalizado de la capacitación.
+### **Gestión de Usuarios:**
+- **Descripción**: Módulo que permite la creación, edición y gestión de diferentes tipos de usuarios (Clientes, Profesionales y Administrativos).
+- **Funcionalidades**:
+  - **Crear Usuario**: Formulario para crear un nuevo usuario, especificando los datos generales (nombre, correo, tipo de usuario).
+  - **Editar Usuario**: Opciones de edición específicas para cada tipo de usuario (Cliente, Profesional o Administrativo), permitiendo modificar detalles como dirección, teléfono o cargo.
 
+### **Listado de usuarios y capacitaciones:**
+- **Descripción**: Listado con opciones para ver, editar y eliminar usuarios y capacitaciones.
+- **Funcionalidades**:
+  - **Listar Usuarios**: Muestra un listado completo de los usuarios registrados en el sistema, con opciones para editar o eliminar cada usuario.
+  - **Listar Capacitaciones**: Muestra un listado de todas las capacitaciones disponibles.
+  - **Editar Usuario**: Formulario para actualizar la información de usuarios específicos según su tipo (Cliente, Profesional, Administrativo).
 
-**Gestión de usuarios:** Creación y gestión de usuarios, con despliegue personalizado de datos específicos según el tipo.
+### **Gestión de Pagos:**
+- **Descripción**: Módulo para la creación y administración de pagos realizados por los clientes en relación a las capacitaciones.
+- **Funcionalidades**:
+  - **Crear Pago**: Formulario para registrar un pago, ingresando datos como RUT de la empresa, monto, fecha y detalles del pago.
+  - **Listar Pagos**: Listado de todos los pagos realizados con opciones para visualizar detalles o eliminar.
 
+### **Gestión de Visitas y Checklist:**
+- **Descripción**: Módulo que permite la gestión de visitas y el llenado de checklists relacionados con los servicios prestados.
+- **Funcionalidades**:
+  - **Listado de Visitas**: Listado de visitas registradas en el sistema, con detalles como fecha, cliente, y motivo de la visita.
+  - **Responder Checklist**: Formulario para responder un checklist predefinido asociado a una visita.
 
-**Listado de usuarios y capacitaciones:** Gestión de listado con edición de Usuarios con sus respectivos datos.
+Esta estructura debería ayudarte a organizar los módulos de tu aplicación. Si necesitas más detalles o ajustes, no dudes en pedirlos.
 
 
 
