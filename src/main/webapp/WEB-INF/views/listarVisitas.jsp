@@ -4,6 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Visitas</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/estilo.css">
     <!-- Bootstrap CSS -->
@@ -27,8 +28,7 @@
                 ${error}
             </div>
         </c:if>
-
-        <a href="${pageContext.request.contextPath}/crearVisita" class="btn btn-primary mb-3">Crear Nueva Visita</a>
+            <a href="${pageContext.request.contextPath}/crearVisita" class="btn btn-outline-light">Crear Nueva Visita</a>
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>

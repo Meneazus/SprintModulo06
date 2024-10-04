@@ -10,6 +10,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Tu archivo de estilos personalizado -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/estilo.css">
+    <!-- Validación personalizada con Bootstrap -->
+    <script src="res/js/capacitacion.js"></script>
 </head>
 <body>
 
@@ -72,29 +74,7 @@
     <!-- Bootstrap JS Bundle (incluye Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Validación personalizada con Bootstrap -->
-    <script>
-        // Ejemplo de validación Bootstrap
-        (function () {
-            'use strict'
 
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.querySelectorAll('form')
-
-            // Loop over them and prevent submission
-            Array.prototype.slice.call(forms)
-                .forEach(function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                        }
-
-                        form.classList.add('was-validated')
-                    }, false)
-                })
-        })()
-    </script>
 
 </body>
 </html>

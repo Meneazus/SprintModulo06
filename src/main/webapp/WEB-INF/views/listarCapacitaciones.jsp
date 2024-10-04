@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="es" data-bs-theme="dark">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
     <meta charset="UTF-8">
     <title>Listado de Capacitaciones</title>
@@ -28,12 +29,6 @@
         <c:if test="${not empty mensaje}">
             <div class="alert alert-success text-center">${mensaje}</div>
         </c:if>
-
-        <div class="text-end mb-3">
-            <a href="${pageContext.request.contextPath}/capacitaciones/nueva" class="btn btn-primary">
-                Crear Nueva Capacitación
-            </a>
-        </div>
 
         <c:if test="${not empty capacitaciones}">
             <div class="table-responsive">
@@ -73,6 +68,11 @@
                         </c:forEach>
                     </tbody>
                 </table>
+                        <div class="d-grid gap-2 d-md-flex justify-content m-3">
+            <a href="${pageContext.request.contextPath}/capacitaciones/nueva" class="btn btn-outline-light">
+                Crear Nueva Capacitación
+            </a>
+        </div>
             </div>
         </c:if>
         <c:if test="${empty capacitaciones}">

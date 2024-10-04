@@ -4,6 +4,7 @@
 <html lang="es" data-bs-theme="dark">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sesión cerrada</title>
 <!-- Redirección automática después de 5 segundos -->
 <meta http-equiv="refresh" content="3;url=./">

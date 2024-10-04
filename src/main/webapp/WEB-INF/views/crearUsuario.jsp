@@ -19,7 +19,7 @@
     <div class="container my-5">
         <div class="row justify-content-center">
             <div class="col-md-6 text-center">
-                <h1 class="display-4">Crear Nuevo Usuario</h1>
+                <h1 class="mb-4">Crear Nuevo Usuario</h1>
                 <br>
                 <p class="lead">Asegúrate de completar todos los campos requeridos.</p>
             </div>
@@ -127,7 +127,7 @@
                     <br>
 
                     <!-- Botón de envío -->
-                    <button type="submit" class="btn btn-primary" style="margin-top: 15px">Crear Usuario</button>
+                    <button type="submit" class="btn btn-outline-light" style="margin-top: 15px">Crear Usuario</button>
                 </form>
             </div>
         </div>
@@ -139,6 +139,9 @@
     <!-- Bootstrap JS y tus scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
+
+<!-- 	Se intentó importar el script desde un .js pero no funcionaba
+	Script para rellenar y ligar campos a valores predeterminados por la DB -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         function generarNickname() {
