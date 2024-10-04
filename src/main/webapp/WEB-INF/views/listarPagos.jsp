@@ -14,6 +14,7 @@
 </head>
 <body>
 	<%@ include file='navbar.jsp'%>
+	
 	<div class="container">
 		<br> <br>
 		<h2 class="mb-4">Listado de Pagos</h2>

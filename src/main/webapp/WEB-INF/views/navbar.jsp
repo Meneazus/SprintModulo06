@@ -73,6 +73,17 @@
                         </ul>
                     </li>
                     
+               		<!-- Usuarios Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Pagos
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="crearPago">Crear Pagos</a></li>
+                            <li><a class="dropdown-item" href="listarPagos">Listar Pagos</a></li>
+                        </ul>
+                    </li>
+                    
                     <!-- Enlace directo a Contacto -->
                     <li class="nav-item">
                         <a class="nav-link" href="<c:url value='/contacto'/>">Contacto</a>

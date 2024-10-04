@@ -35,53 +35,66 @@ public class Revision implements Serializable {
     @Column(name = "estadoRevision", length = 20, nullable = false)
     private String estadoRevision;
 
-    // Constructores
-    public Revision() {
-    }
+	public Revision() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    public Revision(Visita visita, String nombreRevision, String detalleRevision, String estadoRevision) {
-        this.visita = visita;
-        this.nombreRevision = nombreRevision;
-        this.detalleRevision = detalleRevision;
-        this.estadoRevision = estadoRevision;
-    }
+	public Revision(int idRevision, Visita visita,
+			@NotBlank(message = "El nombre de la revisión es obligatorio.") @Size(max = 50, message = "El nombre de la revisión no debe exceder 50 caracteres.") String nombreRevision,
+			@NotBlank(message = "El detalle de la revisión es obligatorio.") @Size(max = 500, message = "El detalle de la revisión no debe exceder 500 caracteres.") String detalleRevision,
+			@NotBlank(message = "El estado de la revisión es obligatorio.") @Size(max = 20, message = "El estado de la revisión no debe exceder 20 caracteres.") String estadoRevision) {
+		super();
+		this.idRevision = idRevision;
+		this.visita = visita;
+		this.nombreRevision = nombreRevision;
+		this.detalleRevision = detalleRevision;
+		this.estadoRevision = estadoRevision;
+	}
 
-    public int getIdRevision() {
-        return idRevision;
-    }
+	public int getIdRevision() {
+		return idRevision;
+	}
 
-    public void setIdRevision(int idRevision) {
-        this.idRevision = idRevision;
-    }
+	public void setIdRevision(int idRevision) {
+		this.idRevision = idRevision;
+	}
 
-    public Visita getVisita() {
-        return visita;
-    }
+	public Visita getVisita() {
+		return visita;
+	}
 
-    public void setVisita(Visita visita) {
-        this.visita = visita;
-    }
+	public void setVisita(Visita visita) {
+		this.visita = visita;
+	}
 
-    public String getNombreRevision() {
-        return nombreRevision;
-    }
+	public String getNombreRevision() {
+		return nombreRevision;
+	}
 
-    public void setNombreRevision(String nombreRevision) {
-        this.nombreRevision = nombreRevision;
-    }
+	public void setNombreRevision(String nombreRevision) {
+		this.nombreRevision = nombreRevision;
+	}
 
-    public String getDetalleRevision() {
-        return detalleRevision;
-    }
+	public String getDetalleRevision() {
+		return detalleRevision;
+	}
 
-    public void setDetalleRevision(String detalleRevision) {
-        this.detalleRevision = detalleRevision;
-    }
+	public void setDetalleRevision(String detalleRevision) {
+		this.detalleRevision = detalleRevision;
+	}
 
-	/*
-	 * public EstadoRevision getEstadoRevision() { return estadoRevision; }
-	 * 
-	 * public void setEstadoRevision(EstadoRevision estadoRevision) {
-	 * this.estadoRevision = estadoRevision; }
-	 */
+	public String getEstadoRevision() {
+		return estadoRevision;
+	}
+
+	public void setEstadoRevision(String estadoRevision) {
+		this.estadoRevision = estadoRevision;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+    
 }

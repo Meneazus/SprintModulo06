@@ -22,9 +22,9 @@ public class VisitaService {
         return visitaRepository.save(visita);
     }
 
-    // Obtener una visita por su ID
-    public Optional<Visita> obtenerVisitaPorId(int id) {
-        return visitaRepository.findById(id);
+    // Obtener una visita por ID
+    public Visita obtenerVisitaPorId(int idVisita) {
+        return visitaRepository.findById(idVisita).orElse(null);
     }
 
     // Obtener todas las visitas con sus revisiones
