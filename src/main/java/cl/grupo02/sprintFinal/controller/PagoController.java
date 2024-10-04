@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import cl.grupo02.sprintFinal.model.entity.Cliente;
 import cl.grupo02.sprintFinal.model.entity.Pago;
+import cl.grupo02.sprintFinal.model.service.ClienteService;
 import cl.grupo02.sprintFinal.model.service.PagoService;
 
 
@@ -20,30 +22,39 @@ public class PagoController {
 
 	@Autowired
 	private PagoService pagoService;
+	
+	@Autowired
+	private ClienteService clienteService;
 
-	@GetMapping(path = { "/crearPago" })
-	public String paginaInicio(Model model) {
-		// Obtener la lista de pagos o RUT de empresas
-		List<Pago> pagos = pagoService.obtenerTodosPagos();
-		model.addAttribute("pagos", pagos); // Agregar la lista de pagos al modelo
+    @GetMapping(path = { "/crearPago" })
+    public String mostrarPagos(Model model) {
+        // Obtener la lista de clientes para mostrar los rutEmpresa
+        List<Cliente> clientes = clienteService.obtenerTodosClientes();
+        model.addAttribute("clientes", clientes); // Agregar la lista de clientes al modelo
 
-		// Mostrar página
-		return "crearPago"; // Retorna la vista 'crearPago.jsp'
-	}
+        // Mostrar página
+        return "crearPago"; // Retorna la vista 'crearPago.jsp'
+    }
 
-	@PostMapping("/crearPago")
-	public ModelAndView crearPago(@ModelAttribute("pago") Pago pago) {
-		Pago nuevoPago = pagoService.guardarPago(pago);
+    @PostMapping("/crearPago")
+    public ModelAndView crearPago(@ModelAttribute("pago") Pago pago) {
+        // Guardar el pago (no es necesario asignarlo a una variable si no lo usas después)
+        pagoService.guardarPago(pago);
 
-		ModelAndView modelAndView = new ModelAndView("/crearPago");
-		modelAndView.addObject("pago", nuevoPago);
+        // Crear el ModelAndView y asignar la vista a 'crearPago'
+        ModelAndView modelAndView = new ModelAndView("crearPago");
 
-		// Verificar si es un nuevo pago o una actualización
-		String mensaje = (pago.getIdPago() > 0) ? "Pago actualizado con éxito" : "Pago creado con éxito";
+        // Cargar nuevamente la lista de clientes
+        List<Cliente> clientes = clienteService.obtenerTodosClientes();
+        modelAndView.addObject("clientes", clientes);
 
-		modelAndView.addObject("mensaje", mensaje);
-		return modelAndView;
-	}
+        // Verificar si es un nuevo pago o una actualización
+        String mensaje = (pago.getIdPago() == 0) ? "Pago actualizado con éxito" : "Pago creado con éxito";
+        modelAndView.addObject("mensaje", mensaje);
+
+        return modelAndView;
+    }
+
 
 	// Mostrar lista de pagos
 	@GetMapping("/listarPagos")
