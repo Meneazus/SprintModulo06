@@ -2,6 +2,11 @@
 ## Sistema de Información para Empresa de Asesorías en Prevención de Riesgos
 # Integrantes:
 
+Ariel Alfaro
+Bastian Espinosa
+Nicolas Gajardo
+Joshua Montt
+Bastian Muñoz
 
 
 ## Índice
