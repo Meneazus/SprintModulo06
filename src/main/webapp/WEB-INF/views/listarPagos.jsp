@@ -36,7 +36,7 @@
 							<tr>
 								<td>${pago.idPago}</td>
 								<td>${pago.rutEmpresa}</td>
-								<td>${pago.monto}</td>
+								<td>$${pago.monto}</td>
 								<td>${pago.fecha}</td>
 								<td>${pago.detallePago}</td>
 							</tr>
