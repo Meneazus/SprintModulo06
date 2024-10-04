@@ -100,8 +100,7 @@
                                         <a href="${pageContext.request.contextPath}/usuarios/${u.idUsuario}/editar" class="btn btn-warning btn-sm">Modificar</a>
 
                                         <!-- Formulario para eliminar -->
-                                        <form action="${pageContext.request.contextPath}/usuarios/${u.idUsuario}/eliminar" method="post" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
-                                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+
                                         </form>
                                     </td>
                                 </tr>

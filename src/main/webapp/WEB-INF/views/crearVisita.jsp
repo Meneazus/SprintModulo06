@@ -82,6 +82,7 @@
 
             <!-- Botones -->
             <button type="submit" class="btn btn-primary">Guardar</button>
+            <br>
             <a href="${pageContext.request.contextPath}/obtenerVisita" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
