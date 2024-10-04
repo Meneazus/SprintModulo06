@@ -58,7 +58,6 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="<c:url value='/listarRevisiones'/>">Listar Revisiones</a></li>
-                            <li><a class="dropdown-item" href="<c:url value='/crearRevision?idVisita=1'/>">Crear Revisión</a></li> <!-- Ajusta idVisita dinámicamente si es posible -->
                         </ul>
                     </li>
 
@@ -73,8 +72,8 @@
                         </ul>
                     </li>
                     
-               		<!-- Usuarios Dropdown -->
-                    <li class="nav-item dropdown">
+               		<!-- Pagos Dropdown -->
+					<li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Pagos
                         </a>
@@ -82,7 +81,7 @@
                             <li><a class="dropdown-item" href="crearPago">Crear Pagos</a></li>
                             <li><a class="dropdown-item" href="listarPagos">Listar Pagos</a></li>
                         </ul>
-                    </li>
+                    </li>
                     
                     <!-- Enlace directo a Contacto -->
                     <li class="nav-item">
