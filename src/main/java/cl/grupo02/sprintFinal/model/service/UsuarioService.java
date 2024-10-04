@@ -17,6 +17,10 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
+    public Usuario findByNickname(String nickname) {
+        return usuarioRepository.findByNickname(nickname);
+    }
+	
 	// Método para actualizar un usuario existente
 
     @Transactional

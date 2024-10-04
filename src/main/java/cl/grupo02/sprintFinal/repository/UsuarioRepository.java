@@ -9,6 +9,8 @@ import java.util.List;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
+	
+	  Usuario findByNickname(String nickname); // Cambiar a nickname
 
 	List<Usuario> findByTipoUsuario(String tipoUsuario);
     // Métodos personalizados si es necesario

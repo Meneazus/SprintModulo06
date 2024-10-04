@@ -1,47 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bean:beans
-	xmlns:bean="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://www.springframework.org/schema/security"
-	xsi:schemaLocation="
-http://www.springframework.org/schema/beans
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security.xsd">
 
-http://www.springframework.org/schema/beans/spring-beans.xsd
+    <security:http auto-config="true">
+        <security:intercept-url pattern="/" access="permitAll" />
+        <security:intercept-url pattern="/logout" access="permitAll" />
+        <security:intercept-url pattern="/login" access="permitAll" />
+        <security:intercept-url pattern="/contacto" access="hasAnyAuthority ('CLIENTE')" />
+        <security:intercept-url pattern="/obtenerCapacitacion" access="hasAnyAuthority ('CLIENTE')" />
+        <security:intercept-url pattern="/crearCapacitacion" access="hasAnyAuthority ('CLIENTE')" />
+        <security:intercept-url pattern="/listarUsuarios" access="hasAnyAuthority ('ADMINISTRATIVO')" />
+        <security:intercept-url pattern="/crearUsuario" access="hasAnyAuthority ('ADMINISTRATIVO')" />
+		<security:intercept-url pattern="/editarUsuario" access="hasAnyAuthority ('ADMINISTRATIVO')" />
+		<security:intercept-url pattern="/crearPago" access="hasAnyAuthority ('ADMINISTRATIVO')" />
+		<security:intercept-url pattern="/listarPagos" access="hasAnyAuthority ('ADMINISTRATIVO')" />
+		<security:intercept-url pattern="/listarVisitas" access="hasAnyAuthority ('PROFESIONAL')" />
+		<security:intercept-url pattern="/listarRevisiones" access="hasAnyAuthority ('PROFESIONAL')" />
+        
+        <security:form-login login-page="/login"
+            authentication-failure-url="/error" username-parameter="nickname"
+            password-parameter="contrasena" />
+        <security:csrf disabled="true" />
+        <security:logout logout-url="/logout"
+            logout-success-url="/logout-success" invalidate-session="true"
+            delete-cookies="JSESSIONID" />
+    </security:http>
 
-http://www.springframework.org/schema/security
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="customUserDetailsService">
+            <security:password-encoder hash="bcrypt" />
+        </security:authentication-provider>
+    </security:authentication-manager>
 
-http://www.springframework.org/schema/security/spring-security.xsd">
-
- <http auto-config="true">
-		<intercept-url pattern="/" access="permitAll" />
-		<intercept-url pattern="/logout" access="permitAll" />
-		<intercept-url pattern="/contacto"  access="hasAnyAuthority ('CLIENTE')" />
-		<intercept-url pattern="/obtenerCapacitacion" access="hasAnyAuthority ('CLIENTE')" />
-		<intercept-url pattern="/listarUsuarios" access="hasAnyAuthority ('ADMIN')" />
-		
-		
-<!-- 		<access-denied-handler error-page="/404" /> -->
-		<form-login login-page="/login"
-			authentication-failure-url="/error" username-parameter="username"
-			password-parameter="password" />
-		<csrf disabled="true" />
-		<!-- Configuración de logout -->
-		<logout logout-url="/logout"
-			logout-success-url="/logout-success" invalidate-session="true"
-			delete-cookies="JSESSIONID" />
-
-	</http>
-	<authentication-manager>
-		<authentication-provider>
-			<password-encoder hash="bcrypt" />
-			<user-service>
-				<user name="nico"
-					password="$2a$10$lcAWfX1gUOyJxagwcq0R0uEUqp0yKIg.Qg2oLv1DHrC1C1U1EC02u"
-					authorities="CLIENTE" />
-				<user name="bastian"
-					password="$2a$10$lcAWfX1gUOyJxagwcq0R0uEUqp0yKIg.Qg2oLv1DHrC1C1U1EC02u"
-					authorities="ADMIN" />
-			</user-service>
-		</authentication-provider>
-	</authentication-manager>
-</bean:beans>
+    <bean id="customUserDetailsService" class="cl.grupo02.sprintFinal.model.service.CustomUserDetailsService"/> <!-- Reemplaza "tu.paquete" con el paquete correcto -->
+</beans>

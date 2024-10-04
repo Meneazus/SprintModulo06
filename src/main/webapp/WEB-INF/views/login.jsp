@@ -36,16 +36,16 @@
 									<form action="/sprintFinal/login" method="post">
 
 										<div data-mdb-input-init class="form-outline form-white mb-4">
-											<input type="text" id="username" name="username"
+											<input type="text" id="nickname" name="nickname"
 												class="form-control form-control-lg" required /> <label
-												class="form-label" id="username">Nombre de usuario</label>
+												class="form-label" id="nickname">Nombre de usuario</label>
 
 										</div>
 
 										<div data-mdb-input-init class="form-outline form-white mb-4">
-											<input type="password" id="password" name="password"
+											<input type="password" id="contrasena" name="contrasena"
 												class="form-control form-control-lg" required /> <label
-												class="form-label" for="password">Contraseña</label>
+												class="form-label" for="contrasena">Contraseña</label>
 										</div>
 
 										<p class="small mb-5 pb-lg-2">
@@ -81,12 +81,12 @@
 										%>
 										<h2 class="form-signin-heading">Bienvenido</h2>
 										<p>
-											<input type="text" id="username" name="username"
+											<input type="text" id="nickname" name="nickname"
 												class="form-control" placeholder="Usuario" required=""
 												autofocus="">
 										</p>
 										<p>
-											<input type="password" id="password" name="password"
+											<input type="contrasena" id="contrasena" name="contrasena"
 												class="form-control" placeholder="Contraseña" required="">
 										</p>
 										<input name="_csrf" type="hidden"
