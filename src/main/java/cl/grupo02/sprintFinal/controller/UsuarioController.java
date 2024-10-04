@@ -21,6 +21,16 @@ import cl.grupo02.sprintFinal.model.service.AdministrativoService;
 import cl.grupo02.sprintFinal.model.service.ClienteService;
 import cl.grupo02.sprintFinal.model.service.ProfesionalService;
 
+/**
+ * Controlador para gestionar los usuarios.
+ * 
+ * @autor Ariel Alfaro
+ * @autor Bastian Muñoz
+ * @autor Bastian Espinosa
+ * @autor Joshua Montt
+ * @autor Nicolas Gajardo
+ * @version 1.0
+ */
 @Controller
 @RequestMapping("/usuarios")
 public class UsuarioController {
@@ -39,7 +49,13 @@ public class UsuarioController {
     @Autowired
     private AdministrativoService administrativoService;
 
-    // Listar usuarios
+    /**
+     * Lista los usuarios, opcionalmente filtrados por tipo de usuario.
+     *
+     * @param tipoUsuario el tipo de usuario para filtrar (opcional)
+     * @param model el modelo para agregar atributos
+     * @return el nombre de la vista para listar los usuarios
+     */
     @GetMapping
     public String listarUsuarios(@RequestParam(required = false) String tipoUsuario, Model model) {
         List<Usuario> usuarios;
@@ -55,14 +71,27 @@ public class UsuarioController {
         return "listarUsuarios";
     }
 
-    // Mostrar formulario para crear un usuario
+    /**
+     * Muestra el formulario para crear un nuevo usuario.
+     *
+     * @param model el modelo para agregar atributos
+     * @return el nombre de la vista para crear un usuario
+     */
     @GetMapping("/crear")
     public String mostrarFormularioCreacion(Model model) {
         model.addAttribute("formularioUsuario", new FormularioUsuario());
         return "crearUsuario";
     }
 
-    // Procesar la creación de un nuevo usuario
+    /**
+     * Procesa la creación de un nuevo usuario.
+     *
+     * @param form el formulario de usuario con los datos ingresados
+     * @param result el resultado de la validación
+     * @param redirectAttributes atributos para redirección
+     * @param model el modelo para agregar atributos
+     * @return redirige a la lista de usuarios o muestra el formulario con errores
+     */
     @PostMapping("/crear")
     public String crearUsuario(@Validated(ValidacionCrear.class) @ModelAttribute("formularioUsuario") FormularioUsuario form,
                                BindingResult result,
@@ -131,7 +160,13 @@ public class UsuarioController {
         }
     }
 
-    // Mostrar formulario de edición de usuario
+    /**
+     * Muestra el formulario de edición para un usuario existente.
+     *
+     * @param id el identificador del usuario a editar
+     * @param model el modelo para agregar atributos
+     * @return el nombre de la vista para editar el usuario o redirige si no se encuentra
+     */
     @GetMapping("/{id}/editar")
     public String mostrarFormularioEdicion(@PathVariable("id") Integer id, Model model) {
         Optional<Usuario> optionalUsuario = usuarioService.obtenerUsuarioPorId(id);
@@ -147,7 +182,16 @@ public class UsuarioController {
         return "editarUsuario";
     }
 
-    // Procesar actualización de usuario
+    /**
+     * Procesa la actualización de un usuario existente.
+     *
+     * @param id el identificador del usuario a actualizar
+     * @param form el formulario de usuario con los datos actualizados
+     * @param result el resultado de la validación
+     * @param redirectAttributes atributos para redirección
+     * @param model el modelo para agregar atributos
+     * @return redirige a la lista de usuarios o muestra el formulario con errores
+     */
     @PostMapping("/{id}/editar")
     public String procesarActualizacionUsuario(@PathVariable("id") Integer id,
                                                @Validated(ValidacionActualizar.class) @ModelAttribute("formularioUsuario") FormularioUsuario form,
@@ -183,6 +227,12 @@ public class UsuarioController {
 
     // Métodos auxiliares
 
+    /**
+     * Mapea los campos comunes del formulario al objeto Usuario.
+     *
+     * @param usuario el objeto Usuario a mapear
+     * @param form el formulario con los datos ingresados
+     */
     private void mapearCamposComunes(Usuario usuario, FormularioUsuario form) {
         usuario.setNombreUsuario(form.getNombreUsuario());
         usuario.setApellidoUsuario(form.getApellidoUsuario());
@@ -196,6 +246,12 @@ public class UsuarioController {
         usuario.setTipoUsuario(form.getTipoUsuario());
     }
 
+    /**
+     * Mapea un objeto Usuario a un formulario de usuario.
+     *
+     * @param usuario el objeto Usuario a mapear
+     * @return el formulario de usuario con los datos mapeados
+     */
     private FormularioUsuario mapearUsuarioAFormulario(Usuario usuario) {
         FormularioUsuario form = new FormularioUsuario();
         form.setIdUsuario(usuario.getIdUsuario());
@@ -243,6 +299,12 @@ public class UsuarioController {
         return form;
     }
 
+    /**
+     * Mapea los campos del formulario al objeto Usuario existente.
+     *
+     * @param form el formulario con los datos actualizados
+     * @param usuario el objeto Usuario a actualizar
+     */
     private void mapearFormularioAUsuario(FormularioUsuario form, Usuario usuario) {
         usuario.setNombreUsuario(form.getNombreUsuario());
         usuario.setApellidoUsuario(form.getApellidoUsuario());
@@ -291,7 +353,13 @@ public class UsuarioController {
         }
     }
 
-    // Eliminar usuario
+    /**
+     * Elimina un usuario por su identificador.
+     *
+     * @param id el identificador del usuario a eliminar
+     * @param redirectAttributes atributos para redirección
+     * @return redirige a la lista de usuarios
+     */
     @GetMapping("/{id}/eliminar")
     public String eliminarUsuario(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
         try {

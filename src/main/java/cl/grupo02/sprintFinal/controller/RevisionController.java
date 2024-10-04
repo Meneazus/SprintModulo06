@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -21,6 +20,16 @@ import cl.grupo02.sprintFinal.model.service.VisitaService;
 
 import javax.validation.Valid;
 
+/**
+ * Controlador para gestionar las revisiones.
+ * 
+ * @autor Ariel Alfaro
+ * @autor Bastian Muñoz
+ * @autor Bastian Espinosa
+ * @autor Joshua Montt
+ * @autor Nicolas Gajardo
+ * @version 1.0
+ */
 @Controller
 public class RevisionController {
 
@@ -32,7 +41,12 @@ public class RevisionController {
 
     private static final Logger logger = LogManager.getLogger(RevisionController.class);
 
-    // Mostrar lista de revisiones
+    /**
+     * Lista todas las revisiones.
+     *
+     * @param model el modelo para agregar atributos
+     * @return el nombre de la vista para listar las revisiones
+     */
     @GetMapping("/listarRevisiones")
     public String listarRevisiones(Model model) {
         List<Revision> revisiones = revisionService.obtenerTodasRevisiones();
@@ -40,7 +54,13 @@ public class RevisionController {
         return "listarRevisiones"; // Asegúrate de tener esta vista creada
     }
 
-    // Mostrar formulario para crear una revisión
+    /**
+     * Muestra el formulario para crear una nueva revisión.
+     *
+     * @param model el modelo para agregar atributos
+     * @param idVisita el identificador de la visita asociada
+     * @return el nombre de la vista para crear una revisión
+     */
     @GetMapping("/crearRevision")
     public String mostrarCrearRevision(Model model, @RequestParam("idVisita") int idVisita) {
         Revision revision = new Revision();
@@ -55,8 +75,16 @@ public class RevisionController {
         return "crearRevision";
     }
 
-
-    // Procesar la creación de una nueva revisión
+    /**
+     * Procesa la creación de una nueva revisión.
+     *
+     * @param revision el objeto de revisión a crear
+     * @param bindingResult el resultado de la validación
+     * @param idVisita el identificador de la visita asociada
+     * @param model el modelo para agregar atributos
+     * @param redirectAttributes atributos para redirección
+     * @return redirige a la lista de revisiones o muestra el formulario con errores
+     */
     @PostMapping("/crearRevision")
     public String crearRevision(@Valid Revision revision, 
                                 BindingResult bindingResult, 

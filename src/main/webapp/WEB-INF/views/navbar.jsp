@@ -15,10 +15,12 @@
 	rel="stylesheet">
 <!-- Tu archivo de estilos personalizado -->
 <link rel="stylesheet" type="text/css" href="<c:url value='/res/css/estilo.css'/>">
+
 </head>
 
 <%
 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
 boolean isCliente = false;
 boolean isAdministrativo = false;
 boolean isProfesional = false;
