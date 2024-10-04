@@ -54,8 +54,11 @@
 												contraseña?</a>
 										</p>
 
-										<button data-mdb-button-init data-mdb-ripple-init
+									<div class="row d-flex align-items-center">
+										<button
 											class="btn btn-outline-light" type="submit">Ingresar</button>
+											</div>
+											
 									</form>
 									<br>
 									<%
