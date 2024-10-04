@@ -24,7 +24,7 @@
                     <th>Nombre de Revisión</th>
                     <th>Detalle</th>
                     <th>Estado</th>
-                    <th>Acciones</th>
+                    <!-- <th>Acciones</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -35,9 +35,9 @@
                         <td>${revision.nombreRevision}</td>
                         <td>${revision.detalleRevision}</td>
                         <td>${revision.estadoRevision}</td>
-                        <td>
-                            <!-- Agrega acciones como editar o eliminar si es necesario -->
-                        </td>
+ <!--                        <td>
+                            Agrega acciones como editar o eliminar si es necesario
+                        </td> -->
                     </tr>
                 </c:forEach>
             </tbody>
