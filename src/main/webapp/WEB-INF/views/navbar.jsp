@@ -1,67 +1,89 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="es" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
+    <title>Navbar</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Tu archivo de estilos personalizado -->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/estilo.css">
+    <link rel="stylesheet" type="text/css" href="<c:url value='/res/css/estilo.css'/>">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <!-- Marca de la aplicaci贸n -->
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/">Prevenci贸n Segura</a>
-            <!-- Bot贸n para dispositivos m贸viles -->
+            <!-- Marca de la aplicaci髇 -->
+            <a class="navbar-brand" href="<c:url value='/'/>">Prevenci髇 Segura</a>
+            <!-- Bot髇 para dispositivos m髒iles -->
             <button class="navbar-toggler" type="button"
                 data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <!-- Enlaces de navegaci贸n -->
+            <!-- Enlaces de navegaci髇 -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <!-- Enlace siempre visible -->
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/">Inicio</a>
+                        <a class="nav-link" aria-current="page" href="<c:url value='/'/>">Inicio</a>
                     </li>
                     
+                    <!-- Capacitaciones Dropdown -->
                     <li class="nav-item dropdown">
-			          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Capacitaciones</a>
-			          <ul class="dropdown-menu">
-			            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/capacitaciones">Listar Capacitaciones</a></li>
-			            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/capacitaciones/nueva">Crear Capacitaci贸n</a></li>
-			          </ul>
-			        </li>
-
-                    <!-- Enlaces directos -->
-
-                     <li class="nav-item dropdown">
-			          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuarios</a>
-			          <ul class="dropdown-menu">
-			            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/usuarios">Listar Usuarios</a></li>
-			            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/usuarios/crear">Crear Usuario</a></li>
-			            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/usuarios">Editar Usuarios</a></li>
-			          </ul>
-			        </li>
-                    
-                    <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/contacto">Contacto</a>
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Capacitaciones
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="<c:url value='/capacitaciones'/>">Listar Capacitaciones</a></li>
+                            <li><a class="dropdown-item" href="<c:url value='/capacitaciones/nueva'/>">Crear Capacitaci髇</a></li>
+                        </ul>
                     </li>
-                    <!-- Bot贸n de Login -->
+
+                    <!-- Visitas a Terreno Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Visitas a Terreno
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="<c:url value='/obtenerVisita'/>">Listar Visitas</a></li>
+                            <li><a class="dropdown-item" href="<c:url value='/crearVisita'/>">Crear Visita</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Revisiones de Check List Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Revisiones de Check List
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="<c:url value='/listarRevisiones'/>">Listar Revisiones</a></li>
+                            <li><a class="dropdown-item" href="<c:url value='/crearRevision?idVisita=1'/>">Crear Revisi髇</a></li> <!-- Ajusta idVisita din醡icamente si es posible -->
+                        </ul>
+                    </li>
+
+                    <!-- Usuarios Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Usuarios
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="<c:url value='/usuarios'/>">Listar Usuarios</a></li>
+                            <li><a class="dropdown-item" href="<c:url value='/usuarios/crear'/>">Crear Usuario</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Enlace directo a Contacto -->
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
+                        <a class="nav-link" href="<c:url value='/contacto'/>">Contacto</a>
+                    </li>
+                    <!-- Bot髇 de Login -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value='/login'/>">Login</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-
-    <!-- Contenido de la p谩gina -->
 </body>
 </html>

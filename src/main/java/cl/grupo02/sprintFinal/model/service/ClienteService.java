@@ -42,13 +42,17 @@ public class ClienteService {
     }
     
 
-
-    @Transactional(readOnly = true)
-    public Optional<Cliente> obtenerClientePorId(int id) {
-        return clienteRepository.findById(id);
+    // Obtener un cliente por ID
+    public Cliente obtenerClientePorId(int idCliente) {
+        return clienteRepository.findById(idCliente).orElse(null);
     }
 
-    @Transactional(readOnly = true)
+	/*
+	 * @Transactional(readOnly = true) public List<Cliente> obtenerTodosClientes() {
+	 * return clienteRepository.findAll(); }
+	 */
+    
+    // Obtener todos los clientes
     public List<Cliente> obtenerTodosClientes() {
         return clienteRepository.findAll();
     }

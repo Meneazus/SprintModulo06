@@ -2,106 +2,130 @@ package cl.grupo02.sprintFinal.model.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "clientes")
-public class Cliente{
+public class Cliente implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idCliente;
+    private static final long serialVersionUID = 1L;
 
-	@OneToOne
-	@JoinColumn(name = "idUsuario")
-	private Usuario usuario;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idCliente")
+    private int idCliente;
 
-	private String nombreEmpresa;
-	private String rutEmpresa;
-	private String telefonoEmpresa;
-	private String correoEmpresa;
-	private String direccionEmpresa;
-	private String comunaEmpresa;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idUsuario", nullable = false)
+    private Usuario usuario;
 
-	public Cliente() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    @Column(name = "nombreEmpresa", length = 50, nullable = false)
+    private String nombreEmpresa;
 
-	public Cliente(Integer idCliente, Usuario usuario, String nombreEmpresa, String rutEmpresa, String telefonoEmpresa,
-			String correoEmpresa, String direccionEmpresa, String comunaEmpresa) {
-		super();
-		this.idCliente = idCliente;
-		this.usuario = usuario;
-		this.nombreEmpresa = nombreEmpresa;
-		this.rutEmpresa = rutEmpresa;
-		this.telefonoEmpresa = telefonoEmpresa;
-		this.correoEmpresa = correoEmpresa;
-		this.direccionEmpresa = direccionEmpresa;
-		this.comunaEmpresa = comunaEmpresa;
-	}
+    @Column(name = "rutEmpresa", length = 20, unique = true, nullable = false)
+    private String rutEmpresa;
 
-	public Integer getIdCliente() {
-		return idCliente;
-	}
+    @Column(name = "telefonoEmpresa", length = 20)
+    private String telefonoEmpresa;
 
-	public void setIdCliente(Integer idCliente) {
-		this.idCliente = idCliente;
-	}
+    @Column(name = "correoEmpresa", length = 50)
+    private String correoEmpresa;
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
+    @Column(name = "direccionEmpresa", length = 100)
+    private String direccionEmpresa;
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+    @Column(name = "comunaEmpresa", length = 50)
+    private String comunaEmpresa;
 
-	public String getNombreEmpresa() {
-		return nombreEmpresa;
-	}
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Visita> visitas;
 
-	public void setNombreEmpresa(String nombreEmpresa) {
-		this.nombreEmpresa = nombreEmpresa;
-	}
+    // Constructores
+    public Cliente() {
+    }
 
-	public String getRutEmpresa() {
-		return rutEmpresa;
-	}
+    public Cliente(Usuario usuario, String nombreEmpresa, String rutEmpresa, String telefonoEmpresa,
+                  String correoEmpresa, String direccionEmpresa, String comunaEmpresa) {
+        this.usuario = usuario;
+        this.nombreEmpresa = nombreEmpresa;
+        this.rutEmpresa = rutEmpresa;
+        this.telefonoEmpresa = telefonoEmpresa;
+        this.correoEmpresa = correoEmpresa;
+        this.direccionEmpresa = direccionEmpresa;
+        this.comunaEmpresa = comunaEmpresa;
+    }
 
-	public void setRutEmpresa(String rutEmpresa) {
-		this.rutEmpresa = rutEmpresa;
-	}
+    // Getters y Setters
 
-	public String getTelefonoEmpresa() {
-		return telefonoEmpresa;
-	}
+    public int getIdCliente() {
+        return idCliente;
+    }
 
-	public void setTelefonoEmpresa(String telefonoEmpresa) {
-		this.telefonoEmpresa = telefonoEmpresa;
-	}
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
 
-	public String getCorreoEmpresa() {
-		return correoEmpresa;
-	}
+    public Usuario getUsuario() {
+        return usuario;
+    }
 
-	public void setCorreoEmpresa(String correoEmpresa) {
-		this.correoEmpresa = correoEmpresa;
-	}
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
-	public String getDireccionEmpresa() {
-		return direccionEmpresa;
-	}
+    public String getNombreEmpresa() {
+        return nombreEmpresa;
+    }
 
-	public void setDireccionEmpresa(String direccionEmpresa) {
-		this.direccionEmpresa = direccionEmpresa;
-	}
+    public void setNombreEmpresa(String nombreEmpresa) {
+        this.nombreEmpresa = nombreEmpresa;
+    }
 
-	public String getComunaEmpresa() {
-		return comunaEmpresa;
-	}
+    public String getRutEmpresa() {
+        return rutEmpresa;
+    }
 
-	public void setComunaEmpresa(String comunaEmpresa) {
-		this.comunaEmpresa = comunaEmpresa;
-	}
+    public void setRutEmpresa(String rutEmpresa) {
+        this.rutEmpresa = rutEmpresa;
+    }
 
+    public String getTelefonoEmpresa() {
+        return telefonoEmpresa;
+    }
+
+    public void setTelefonoEmpresa(String telefonoEmpresa) {
+        this.telefonoEmpresa = telefonoEmpresa;
+    }
+
+    public String getCorreoEmpresa() {
+        return correoEmpresa;
+    }
+
+    public void setCorreoEmpresa(String correoEmpresa) {
+        this.correoEmpresa = correoEmpresa;
+    }
+
+    public String getDireccionEmpresa() {
+        return direccionEmpresa;
+    }
+
+    public void setDireccionEmpresa(String direccionEmpresa) {
+        this.direccionEmpresa = direccionEmpresa;
+    }
+
+    public String getComunaEmpresa() {
+        return comunaEmpresa;
+    }
+
+    public void setComunaEmpresa(String comunaEmpresa) {
+        this.comunaEmpresa = comunaEmpresa;
+    }
+
+    public List<Visita> getVisitas() {
+        return visitas;
+    }
+
+    public void setVisitas(List<Visita> visitas) {
+        this.visitas = visitas;
+    }
 }
