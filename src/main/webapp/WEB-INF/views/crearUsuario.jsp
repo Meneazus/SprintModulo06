@@ -1,162 +1,227 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="es" data-bs-theme="dark">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Crear Usuario - Prevención Segura</title>
-	<!-- Bootstrap CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="res/css/estilo.css">
-	<script src="res/js/crearUsuarioFields.js"></script>
-	<script src="res/js/nickname.js"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Usuario - Prevención Segura</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="res/css/estilo.css">
 </head>
 <body>
-	<!-- Navbar -->
-	<%@ include file='navbar.jsp'%>
+    <!-- Navbar -->
+    <%@ include file='navbar.jsp'%>
 
-	<!-- Main content -->
-	<div class="container my-5">
-		<div class="row justify-content-center">
-			<div class="col-md-6 text-center">
-				<h1 class="display-4">Crear Nuevo Usuario</h1>
-				<br>
-				<p class="lead">Asegúrate de completar todos los campos requeridos.</p>
-			</div>
-		</div>
+    <!-- Main content -->
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <h1 class="display-4">Crear Nuevo Usuario</h1>
+                <br>
+                <p class="lead">Asegúrate de completar todos los campos requeridos.</p>
+            </div>
+        </div>
 
-		<div class="row justify-content-center">
-			<div class="col-md-6">
-				<form action="crearUsuario" method="post" id="userForm" novalidate>
-					<!-- Nombre de usuario -->
-					<div class="form-group mb-3">
-						<label for="nombreUsuario">Nombre del Usuario:</label> 
-						<input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" placeholder="Ingrese el nombre del usuario" required>
-						<div class="invalid-feedback">Por favor, ingrese el nombre del usuario.</div>
+        <!-- Mostrar mensajes de error o éxito -->
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <c:if test="${not empty error}">
+                    <div class="alert alert-danger">${error}</div>
+                </c:if>
+                <c:if test="${not empty mensaje}">
+                    <div class="alert alert-success">${mensaje}</div>
+                </c:if>
+            </div>
+        </div>
 
-						<label for="apellidoUsuario">Apellido del Usuario:</label>
-						<input type="text" class="form-control" id="apellidoUsuario" name="apellidoUsuario" placeholder="Ingrese el apellido del usuario" required>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form action="${pageContext.request.contextPath}/usuarios/crear" method="post" id="userForm" novalidate>
+                    <!-- Nombre de usuario -->
+                    <div class="form-group mb-3">
+                        <label for="nombreUsuario">Nombre del Usuario:</label>
+                        <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" placeholder="Ingrese el nombre del usuario" required>
+                        <div class="invalid-feedback">Por favor, ingrese el nombre del usuario.</div>
 
-						<div class="invalid-feedback">Por favor, ingrese el apellido del usuario.</div>
+                        <label for="apellidoUsuario" style="margin-top: 15px">Apellido del Usuario:</label>
+                        <input type="text" class="form-control" id="apellidoUsuario" name="apellidoUsuario" placeholder="Ingrese el apellido del usuario" required>
+                        <div class="invalid-feedback">Por favor, ingrese el apellido del usuario.</div>
 
-						<label for="nickname" style="margin-top: 15px">Nombre de Usuario:</label> 
-						<input type="text" class="form-control" id="nickname" name="nickname" readonly>
+                        <label for="nickname" style="margin-top: 15px">Nombre de Usuario:</label>
+                        <input type="text" class="form-control" id="nickname" name="nickname" readonly>
 
-						<label for="contrasena" style="margin-top: 15px">Contraseña:</label> 
-						<input type="password" class="form-control" id="contrasena" name="contrasena" required>
+                        <label for="contrasena" style="margin-top: 15px">Contraseña:</label>
+                        <input type="password" class="form-control" id="contrasena" name="contrasena" required>
+                        <div class="invalid-feedback">Por favor, ingrese una contraseña.</div>
 
-						<label for="runUsuario" style="margin-top: 15px">RUN del Usuario:</label> 
-						<input type="text" class="form-control" id="runUsuario" name="runUsuario" placeholder="Ingrese el RUN del usuario" required>
-						<div class="invalid-feedback">Por favor, ingrese el RUN del usuario.</div>
+                        <label for="runUsuario" style="margin-top: 15px">RUN del Usuario:</label>
+                        <input type="text" class="form-control" id="runUsuario" name="runUsuario" placeholder="Ingrese el RUN del usuario" required>
+                        <div class="invalid-feedback">Por favor, ingrese el RUN del usuario.</div>
 
-						<label for="correoUsuario" style="margin-top: 15px">Correo del Usuario:</label>
-						<input type="text" class="form-control" id="correoUsuario" name="correoUsuario" placeholder="Ingrese el correo del usuario" required>
-						<div class="invalid-feedback">Por favor, ingrese el correo del usuario.</div>
+                        <label for="correoUsuario" style="margin-top: 15px">Correo del Usuario:</label>
+                        <input type="email" class="form-control" id="correoUsuario" name="correoUsuario" placeholder="Ingrese el correo del usuario" required>
+                        <div class="invalid-feedback">Por favor, ingrese el correo del usuario.</div>
 
-						<label for="telefonoUsuario" style="margin-top: 15px">Teléfono del Usuario:</label> 
-						<input type="text" class="form-control" id="telefonoUsuario" name="telefonoUsuario" placeholder="Ingrese el teléfono del usuario" required>
-						<div class="invalid-feedback">Por favor, ingrese el teléfono del usuario.</div>
-					</div>
+                        <label for="telefonoUsuario" style="margin-top: 15px">Teléfono del Usuario:</label>
+                        <input type="text" class="form-control" id="telefonoUsuario" name="telefonoUsuario" placeholder="Ingrese el teléfono del usuario" required>
+                        <div class="invalid-feedback">Por favor, ingrese el teléfono del usuario.</div>
+                    </div>
 
-					<!-- Tipo de usuario -->
-					<div class="form-group">
-						<label for="tipoUsuario">Tipo de Usuario:</label> 
-						<select class="form-control" id="tipoUsuario" name="tipoUsuario" required>
-							<option value="" selected disabled>Seleccione el tipo de usuario</option>
-							<option value="cliente">Cliente</option>
-							<option value="administrativo">Administrativo</option>
-							<option value="profesional">Profesional</option>
-						</select>
-						<div class="invalid-feedback">Por favor, seleccione un tipo de usuario.</div>
-					</div>
+                    <!-- Tipo de usuario -->
+                    <div class="form-group">
+                        <label for="tipoUsuario">Tipo de Usuario:</label>
+                        <select class="form-control" id="tipoUsuario" name="tipoUsuario" required>
+                            <option value="" selected disabled>Seleccione el tipo de usuario</option>
+                            <option value="cliente">Cliente</option>
+                            <option value="administrativo">Administrativo</option>
+                            <option value="profesional">Profesional</option>
+                        </select>
+                        <div class="invalid-feedback">Por favor, seleccione un tipo de usuario.</div>
+                    </div>
 
-					<!-- Campos adicionales para Cliente -->
-					<div id="clienteFields" class="d-none">
-						<div class="mb-3">
-							<label for="rut" class="form-label">Rut:</label> 
-							<input type="number" class="form-control" id="rutEmpresa" name="rutEmpresa" placeholder="Ingrese el RUT de la empresa">
-							<div class="invalid-feedback">Por favor, ingrese un Rut válido.</div>
-						</div>
-						
-						<div class="mb-3">
-							<label for="nombre" class="form-label">Nombre:</label>
-							<input type="text" class="form-control" id="nombreEmpresa" name="nombreEmpresa" placeholder="Ingrese el Nombre de la Empresa">
-							<div class="invalid-feedback">Por favor, ingrese un nombre válido.</div>
-						</div>
+                    <!-- Campos adicionales para Cliente -->
+                    <div id="clienteFields" class="d-none">
+                        <h3>Datos de Empresa</h3>
+                        <label for="nombreEmpresa">Nombre Empresa:</label>
+                        <input type="text" class="form-control" id="nombreEmpresa" name="nombreEmpresa">
 
-						<div class="mb-3">
-							<label for="apellido" class="form-label">Teléfono:</label>
-							<input type="text" class="form-control" id="telefonoEmpresa" name="telefonoEmpresa" placeholder="Ingrese el Teléfono de la Empresa">
-							<div class="invalid-feedback">Por favor, ingrese un teléfono válido.</div>
-						</div>
+                        <label for="rutEmpresa">RUT Empresa:</label>
+                        <input type="text" class="form-control" id="rutEmpresa" name="rutEmpresa">
 
-						<div class="mb-3">
-							<label for="correo" class="form-label">Correo:</label>
-							<input type="email" class="form-control" id="correoEmpresa" name="correoEmpresa" placeholder="Ingrese el Correo Electrónico de la Empresa">
-							<div class="invalid-feedback">Por favor, ingrese un correo válido.</div>
-						</div>
+                        <label for="telefonoEmpresa">Teléfono Empresa:</label>
+                        <input type="text" class="form-control" id="telefonoEmpresa" name="telefonoEmpresa">
 
-						<div class="mb-3">
-							<label for="direccion" class="form-label">Dirección:</label>
-							<input type="text" class="form-control" id="direccionEmpresa" name="direccionEmpresa" placeholder="Ingrese la Dirección de la Empresa">
-							<div class="invalid-feedback">Por favor, ingrese una dirección válida.</div>
-						</div>
+                        <label for="correoEmpresa">Correo Empresa:</label>
+                        <input type="email" class="form-control" id="correoEmpresa" name="correoEmpresa">
 
-						<div class="mb-3">
-							<label for="comuna" class="form-label">Comuna:</label>
-							<input type="text" class="form-control" id="comunaEmpresa" name="comunaEmpresa" placeholder="Ingrese la comuna de la empresa">
-							<div class="invalid-feedback">Por favor, ingrese una comuna válida.</div>
-						</div>
-					</div>
+                        <label for="direccionEmpresa">Dirección Empresa:</label>
+                        <input type="text" class="form-control" id="direccionEmpresa" name="direccionEmpresa">
 
-					<!-- Campos adicionales para Administrativo -->
-					<div id="administrativoFields" class="d-none">
-						<div class="form-group">
-							<label for="areaAdministrativo">Área:</label>
-							<input type="text" class="form-control" id="areaAdministrativo" name="areaAdministrativo" placeholder="Ingrese el área">
-							<div class="invalid-feedback">Por favor, ingrese el área.</div>
-						</div>
+                        <label for="comunaEmpresa">Comuna Empresa:</label>
+                        <input type="text" class="form-control" id="comunaEmpresa" name="comunaEmpresa">
+                    </div>
 
-						<div class="form-group">
-							<label for="experienciaPrevia">Años de Experiencia:</label>
-							<input type="number" class="form-control" id="experienciaPrevia" name="experienciaPrevia" placeholder="Ingrese los años de experiencia">
-							<div class="invalid-feedback">Por favor, ingrese los años de experiencia.</div>
-						</div>
-					</div>
+                    <!-- Campos adicionales para Administrativo -->
+                    <div id="administrativoFields" class="d-none">
+                        <h3>Datos Administrativos</h3>
+                        <label for="areaAdministrativo">Área:</label>
+                        <input type="text" class="form-control" id="areaAdministrativo" name="areaAdministrativo">
 
-					<!-- Campos adicionales para Profesional -->
-					<div id="profesionalFields" class="d-none">
-						<div class="form-group">
-							<label for="tituloProfesional">Título:</label>
-							<input type="text" class="form-control" id="tituloProfesional" name="tituloProfesional" placeholder="Ingrese el título">
-							<div class="invalid-feedback">Por favor, ingrese el título.</div>
-						</div>
+                        <label for="experienciaPrevia">Experiencia Previa:</label>
+                        <input type="text" class="form-control" id="experienciaPrevia" name="experienciaPrevia">
+                    </div>
 
-						<div class="form-group">
-							<label for="fechaIngreso">Fecha de Ingreso:</label>
-							<input type="date" class="form-control" id="fechaIngresoProfesional" name="fechaIngresoProfesional">
-							<div class="invalid-feedback">Por favor, ingrese la fecha de ingreso.</div>
-						</div>
-					</div>
+                    <!-- Campos adicionales para Profesional -->
+                    <div id="profesionalFields" class="d-none">
+                        <h3>Datos Profesionales</h3>
+                        <label for="tituloProfesional">Título Profesional:</label>
+                        <input type="text" class="form-control" id="tituloProfesional" name="tituloProfesional">
 
-					<br>
+                        <label for="fechaIngresoProfesional">Fecha de Ingreso:</label>
+                        <input type="date" class="form-control" id="fechaIngresoProfesional" name="fechaIngresoProfesional">
+                    </div>
 
-					<!-- Botón de envío -->
-					<button type="submit" class="btn btn-primary" style="margin-top: 15px">Crear Usuario</button>
-				</form>
-			</div>
-		</div>
-	</div>
+                    <br>
 
-	<!-- Footer -->
-	<%@ include file='footer.jsp'%>
+                    <!-- Botón de envío -->
+                    <button type="submit" class="btn btn-primary" style="margin-top: 15px">Crear Usuario</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
-	<!-- Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Footer -->
+    <%@ include file='footer.jsp'%>
 
+    <!-- Bootstrap JS y tus scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function generarNickname() {
+            var nombre = document.getElementById('nombreUsuario').value;
+            var apellido = document.getElementById('apellidoUsuario').value;
+
+            if (nombre && apellido) {
+                var nombreUsuario = nombre.charAt(0).toLowerCase() + "_" + apellido.toLowerCase();
+                document.getElementById('nickname').value = nombreUsuario;
+            }
+        }
+
+        // Escucha cambios en los campos de nombre y apellido
+        document.getElementById('nombreUsuario').addEventListener('input', generarNickname);
+        document.getElementById('apellidoUsuario').addEventListener('input', generarNickname);
+
+        // Mostrar campos adicionales según el tipo de usuario seleccionado
+        document.getElementById('tipoUsuario').addEventListener('change', function() {
+            var clienteFields = document.getElementById('clienteFields');
+            var administrativoFields = document.getElementById('administrativoFields');
+            var profesionalFields = document.getElementById('profesionalFields');
+
+            // Ocultar todos los campos adicionales
+            clienteFields.classList.add('d-none');
+            administrativoFields.classList.add('d-none');
+            profesionalFields.classList.add('d-none');
+
+            // Limpiar atributos de required
+            clearRequiredFields();
+
+            // Mostrar los campos adicionales correspondientes
+            if (this.value === 'cliente') {
+                clienteFields.classList.remove('d-none');
+                setRequiredFields(clienteFields);
+            } else if (this.value === 'administrativo') {
+                administrativoFields.classList.remove('d-none');
+                setRequiredFields(administrativoFields);
+            } else if (this.value === 'profesional') {
+                profesionalFields.classList.remove('d-none');
+                setRequiredFields(profesionalFields);
+            }
+        });
+
+        // Limpiar los campos requeridos
+        function clearRequiredFields() {
+            var fields = document.querySelectorAll('#clienteFields input, #administrativoFields input, #profesionalFields input');
+            fields.forEach(function(field) {
+                field.removeAttribute('required');
+                field.classList.remove('is-invalid'); // Quitar clase de error
+            });
+        }
+
+        // Establecer los campos requeridos
+        function setRequiredFields(container) {
+            var fields = container.querySelectorAll('input');
+            fields.forEach(function(field) {
+                field.setAttribute('required', 'true');
+            });
+        }
+
+        // Validar el formulario al enviarlo
+        document.getElementById('userForm').addEventListener('submit', function(event) {
+            var form = this;
+            var isValid = true;
+
+            // Validar todos los campos visibles
+            var requiredFields = form.querySelectorAll('input[required]');
+            requiredFields.forEach(function(field) {
+                if (!field.value) {
+                    field.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    field.classList.remove('is-invalid');
+                }
+            });
+
+            if (!isValid) {
+                event.preventDefault();
+                event.stopPropagation();
+                alert('Por favor, complete todos los campos requeridos.');
+            }
+        });
+    });
+    </script>
 </body>
 </html>

@@ -1,39 +1,67 @@
 package cl.grupo02.sprintFinal.model.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "profesionales")
-public class Profesional extends Usuario {
+public class Profesional{
+
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idProfesional;
+
+    // Clave foránea a Usuario
+    @OneToOne
+    @JoinColumn(name = "idUsuario")
+    private Usuario usuario;
 
     private String tituloProfesional;
     private String fechaIngresoProfesional;
 
+    // Constructores
     public Profesional() {
         super();
     }
 
-    public Profesional(String nombreUsuario, String apellidoUsuario, String runUsuario, String correoUsuario,
-            String telefonoUsuario, String tipoUsuario, String tituloProfesional, String fechaIngresoProfesional) {
-        super(nombreUsuario, apellidoUsuario, runUsuario, correoUsuario, telefonoUsuario, tipoUsuario);
+    public Profesional(Integer idProfesional, Usuario usuario, String tituloProfesional, String fechaIngresoProfesional) {
+        this.idProfesional = idProfesional;
+        this.usuario = usuario;
         this.tituloProfesional = tituloProfesional;
         this.fechaIngresoProfesional = fechaIngresoProfesional;
     }
 
-    public String getTituloProfesional() {
-        return tituloProfesional;
-    }
+	public Integer getIdProfesional() {
+		return idProfesional;
+	}
 
-    public void setTituloProfesional(String tituloProfesional) {
-        this.tituloProfesional = tituloProfesional;
-    }
+	public void setIdProfesional(Integer idProfesional) {
+		this.idProfesional = idProfesional;
+	}
 
-    public String getFechaIngresoProfesional() {
-        return fechaIngresoProfesional;
-    }
+	public Usuario getUsuario() {
+		return usuario;
+	}
 
-    public void setFechaIngresoProfesional(String fechaIngresoProfesional) {
-        this.fechaIngresoProfesional = fechaIngresoProfesional;
-    }
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getTituloProfesional() {
+		return tituloProfesional;
+	}
+
+	public void setTituloProfesional(String tituloProfesional) {
+		this.tituloProfesional = tituloProfesional;
+	}
+
+	public String getFechaIngresoProfesional() {
+		return fechaIngresoProfesional;
+	}
+
+	public void setFechaIngresoProfesional(String string) {
+		this.fechaIngresoProfesional = string;
+	}
+
 }

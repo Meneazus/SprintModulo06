@@ -10,62 +10,69 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "capacitaciones")
 public class Capacitacion {
-	
-	@Id
-	//GeneratedValue se utiliza para hacer que el valor sea autoincremental en la BD
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idCapacitacion")
-	private int idCapacitacion;
-	
-	
-	private String rutEmpresa;
-	private String nombreCapacitacion;
-	private String detalleCapacitacion;
 
-	public Capacitacion() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idCapacitacion")
+    private Integer idCapacitacion; // Cambiado de int a Integer
 
-	public Capacitacion(int idCapacitacion, String rutEmpresa, String nombreCapacitacion,
-			String detalleCapacitacion) {
-		super();
-		this.idCapacitacion = idCapacitacion;
-		this.rutEmpresa = rutEmpresa;
-		this.nombreCapacitacion = nombreCapacitacion;
-		this.detalleCapacitacion = detalleCapacitacion;
-	}
+    private String rutEmpresa;
+    private String nombreCapacitacion;
+    private String detalleCapacitacion;
 
-	public int getIdCapacitacion() {
-		return idCapacitacion;
-	}
+    // Constructor sin argumentos
+    public Capacitacion() {
+        super();
+    }
 
-	public void setIdCapacitacion(int idCapacitacion) {
-		this.idCapacitacion = idCapacitacion;
-	}
+    // Constructor con todos los campos (incluyendo id)
+    public Capacitacion(Integer idCapacitacion, String rutEmpresa, String nombreCapacitacion,
+                        String detalleCapacitacion) {
+        super();
+        this.idCapacitacion = idCapacitacion;
+        this.rutEmpresa = rutEmpresa;
+        this.nombreCapacitacion = nombreCapacitacion;
+        this.detalleCapacitacion = detalleCapacitacion;
+    }
 
-	public String getRutEmpresa() {
-		return rutEmpresa;
-	}
+    // Constructor sin idCapacitacion
+    public Capacitacion(String rutEmpresa, String nombreCapacitacion, String detalleCapacitacion) {
+        super();
+        this.rutEmpresa = rutEmpresa;
+        this.nombreCapacitacion = nombreCapacitacion;
+        this.detalleCapacitacion = detalleCapacitacion;
+    }
 
-	public void setRutEmpresa(String rutEmpresa) {
-		this.rutEmpresa = rutEmpresa;
-	}
+    // Getters y Setters
+    public Integer getIdCapacitacion() {
+        return idCapacitacion;
+    }
 
-	public String getNombreCapacitacion() {
-		return nombreCapacitacion;
-	}
+    public void setIdCapacitacion(Integer idCapacitacion) {
+        this.idCapacitacion = idCapacitacion;
+    }
 
-	public void setNombreCapacitacion(String nombreCapacitacion) {
-		this.nombreCapacitacion = nombreCapacitacion;
-	}
+    public String getRutEmpresa() {
+        return rutEmpresa;
+    }
 
-	public String getDetalleCapacitacion() {
-		return detalleCapacitacion;
-	}
+    public void setRutEmpresa(String rutEmpresa) {
+        this.rutEmpresa = rutEmpresa;
+    }
 
-	public void setDetalleCapacitacion(String detalleCapacitacion) {
-		this.detalleCapacitacion = detalleCapacitacion;
-	}
+    public String getNombreCapacitacion() {
+        return nombreCapacitacion;
+    }
 
+    public void setNombreCapacitacion(String nombreCapacitacion) {
+        this.nombreCapacitacion = nombreCapacitacion;
+    }
+
+    public String getDetalleCapacitacion() {
+        return detalleCapacitacion;
+    }
+
+    public void setDetalleCapacitacion(String detalleCapacitacion) {
+        this.detalleCapacitacion = detalleCapacitacion;
+    }
 }

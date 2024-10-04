@@ -1,208 +1,120 @@
 package cl.grupo02.sprintFinal.model.entity;
 
-import java.util.Map;
+import javax.validation.constraints.NotEmpty;
+import cl.grupo02.sprintFinal.repository.UsuarioRepository.ValidacionCrear;
 
 public class FormularioUsuario {
 
-	private String nombreUsuario;
-	private String apellidoUsuario;
-	private String nickname;
-	private String contrasena;
-	private String runUsuario;
-	private String correoUsuario;
-	private String telefonoUsuario;
-	private String tipoUsuario;
+    private Integer idUsuario;
 
-	private String areaAdministrativo;
-	private String experienciaPrevia;
+    @NotEmpty(message = "El nombre es obligatorio")
+    private String nombreUsuario;
 
-	private String nombreEmpresa;
-	private String rutEmpresa;
-	private String telefonoEmpresa;
-	private String correoEmpresa;
-	private String direccionEmpresa;
-	private String comunaEmpresa;
+    @NotEmpty(message = "El apellido es obligatorio")
+    private String apellidoUsuario;
 
-	private String tituloProfesional;
-	private String fechaIngresoProfesional;
+    @NotEmpty(message = "El nickname es obligatorio")
+    private String nickname;
 
-	public FormularioUsuario() {
-		super();
-	}
+    @NotEmpty(message = "La contraseña es obligatoria", groups = ValidacionCrear.class)
+    private String contrasena;
 
-	public FormularioUsuario(String nombreUsuario, String apellidoUsuario, String nickname, String contrasena,
-			String runUsuario, String correoUsuario, String telefonoUsuario, String tipoUsuario,
-			Map<String, String> camposAdicionales) {
-		super();
-		this.nombreUsuario = nombreUsuario;
-		this.apellidoUsuario = apellidoUsuario;
-		this.nickname = nickname;
-		this.contrasena = contrasena;
-		this.runUsuario = runUsuario;
-		this.correoUsuario = correoUsuario;
-		this.telefonoUsuario = telefonoUsuario;
-		this.tipoUsuario = tipoUsuario;
+    @NotEmpty(message = "El RUN es obligatorio")
+    private String runUsuario;
 
-		// Procesar los campos adicionales según el tipo de usuario
-		if (tipoUsuario.equals("administrativo")) {
-			this.areaAdministrativo = camposAdicionales.get("areaAdministrativo");
-			this.experienciaPrevia = camposAdicionales.get("experienciaPrevia");
-		} else if (tipoUsuario.equals("profesional")) {
-			this.tituloProfesional = camposAdicionales.get("tituloProfesional");
-			this.fechaIngresoProfesional = camposAdicionales.get("fechaIngresoProfesional");
-		} else if (tipoUsuario.equals("cliente")) {
-			this.nombreEmpresa = camposAdicionales.get("nombreEmpresa");
-			this.rutEmpresa = camposAdicionales.get("rutEmpresa");
-			this.telefonoEmpresa = camposAdicionales.get("telefonoEmpresa");
-			this.correoEmpresa = camposAdicionales.get("correoEmpresa");
-			this.direccionEmpresa = camposAdicionales.get("direccionEmpresa");
-			this.comunaEmpresa = camposAdicionales.get("comunaEmpresa");
+    @NotEmpty(message = "El correo es obligatorio")
+    private String correoUsuario;
 
-		}
-	}
+    @NotEmpty(message = "El teléfono es obligatorio")
+    private String telefonoUsuario;
 
-	public String getNombreUsuario() {
-		return nombreUsuario;
-	}
+    @NotEmpty(message = "El tipo de usuario es obligatorio")
+    private String tipoUsuario;
 
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
-	}
+    // Campos específicos para Administrativo
+    private String areaAdministrativo;
+    private String experienciaPrevia;
 
-	public String getApellidoUsuario() {
-		return apellidoUsuario;
-	}
+    // Campos específicos para Cliente
+    private String nombreEmpresa;
+    private String rutEmpresa;
+    private String telefonoEmpresa;
+    private String correoEmpresa;
+    private String direccionEmpresa;
+    private String comunaEmpresa;
 
-	public void setApellidoUsuario(String apellidoUsuario) {
-		this.apellidoUsuario = apellidoUsuario;
-	}
+    // Campos específicos para Profesional
+    private String tituloProfesional;
+    private String fechaIngresoProfesional;
 
-	public String getNickname() {
-		return nickname;
-	}
+    // Constructor por defecto
+    public FormularioUsuario() {}
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
+    // Getters y Setters
 
-	public String getContrasena() {
-		return contrasena;
-	}
+    // Campo idUsuario
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
-	public void setContrasena(String contrasena) {
-		this.contrasena = contrasena;
-	}
+    // Campos comunes
+    public String getNombreUsuario() { return nombreUsuario; }
+    public void setNombreUsuario(String nombreUsuario) { this.nombreUsuario = nombreUsuario; }
 
-	public String getRunUsuario() {
-		return runUsuario;
-	}
+    public String getApellidoUsuario() { return apellidoUsuario; }
+    public void setApellidoUsuario(String apellidoUsuario) { this.apellidoUsuario = apellidoUsuario; }
 
-	public void setRunUsuario(String runUsuario) {
-		this.runUsuario = runUsuario;
-	}
+    public String getNickname() { return nickname; }
+    public void setNickname(String nickname) { this.nickname = nickname; }
 
-	public String getCorreoUsuario() {
-		return correoUsuario;
-	}
+    public String getContrasena() { return contrasena; }
+    public void setContrasena(String contrasena) { this.contrasena = contrasena; }
 
-	public void setCorreoUsuario(String correoUsuario) {
-		this.correoUsuario = correoUsuario;
-	}
+    public String getRunUsuario() { return runUsuario; }
+    public void setRunUsuario(String runUsuario) { this.runUsuario = runUsuario; }
 
-	public String getTelefonoUsuario() {
-		return telefonoUsuario;
-	}
+    public String getCorreoUsuario() { return correoUsuario; }
+    public void setCorreoUsuario(String correoUsuario) { this.correoUsuario = correoUsuario; }
 
-	public void setTelefonoUsuario(String telefonoUsuario) {
-		this.telefonoUsuario = telefonoUsuario;
-	}
+    public String getTelefonoUsuario() { return telefonoUsuario; }
+    public void setTelefonoUsuario(String telefonoUsuario) { this.telefonoUsuario = telefonoUsuario; }
 
-	public String getTipoUsuario() {
-		return tipoUsuario;
-	}
+    public String getTipoUsuario() { return tipoUsuario; }
+    public void setTipoUsuario(String tipoUsuario) { this.tipoUsuario = tipoUsuario; }
 
-	public void setTipoUsuario(String tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
-	}
+    // Campos específicos para Administrativo
+    public String getAreaAdministrativo() { return areaAdministrativo; }
+    public void setAreaAdministrativo(String areaAdministrativo) { this.areaAdministrativo = areaAdministrativo; }
 
-	public String getAreaAdministrativo() {
-		return areaAdministrativo;
-	}
+    public String getExperienciaPrevia() { return experienciaPrevia; }
+    public void setExperienciaPrevia(String experienciaPrevia) { this.experienciaPrevia = experienciaPrevia; }
 
-	public void setAreaAdministrativo(String areaAdministrativo) {
-		this.areaAdministrativo = areaAdministrativo;
-	}
+    // Campos específicos para Cliente
+    public String getNombreEmpresa() { return nombreEmpresa; }
+    public void setNombreEmpresa(String nombreEmpresa) { this.nombreEmpresa = nombreEmpresa; }
 
-	public String getExperienciaPrevia() {
-		return experienciaPrevia;
-	}
+    public String getRutEmpresa() { return rutEmpresa; }
+    public void setRutEmpresa(String rutEmpresa) { this.rutEmpresa = rutEmpresa; }
 
-	public void setExperienciaPrevia(String experienciaPrevia) {
-		this.experienciaPrevia = experienciaPrevia;
-	}
+    public String getTelefonoEmpresa() { return telefonoEmpresa; }
+    public void setTelefonoEmpresa(String telefonoEmpresa) { this.telefonoEmpresa = telefonoEmpresa; }
 
-	public String getNombreEmpresa() {
-		return nombreEmpresa;
-	}
+    public String getCorreoEmpresa() { return correoEmpresa; }
+    public void setCorreoEmpresa(String correoEmpresa) { this.correoEmpresa = correoEmpresa; }
 
-	public void setNombreEmpresa(String nombreEmpresa) {
-		this.nombreEmpresa = nombreEmpresa;
-	}
+    public String getDireccionEmpresa() { return direccionEmpresa; }
+    public void setDireccionEmpresa(String direccionEmpresa) { this.direccionEmpresa = direccionEmpresa; }
 
-	public String getRutEmpresa() {
-		return rutEmpresa;
-	}
+    public String getComunaEmpresa() { return comunaEmpresa; }
+    public void setComunaEmpresa(String comunaEmpresa) { this.comunaEmpresa = comunaEmpresa; }
 
-	public void setRutEmpresa(String rutEmpresa) {
-		this.rutEmpresa = rutEmpresa;
-	}
+    // Campos específicos para Profesional
+    public String getTituloProfesional() { return tituloProfesional; }
+    public void setTituloProfesional(String tituloProfesional) { this.tituloProfesional = tituloProfesional; }
 
-	public String getTelefonoEmpresa() {
-		return telefonoEmpresa;
-	}
-
-	public void setTelefonoEmpresa(String telefonoEmpresa) {
-		this.telefonoEmpresa = telefonoEmpresa;
-	}
-
-	public String getCorreoEmpresa() {
-		return correoEmpresa;
-	}
-
-	public void setCorreoEmpresa(String correoEmpresa) {
-		this.correoEmpresa = correoEmpresa;
-	}
-
-	public String getDireccionEmpresa() {
-		return direccionEmpresa;
-	}
-
-	public void setDireccionEmpresa(String direccionEmpresa) {
-		this.direccionEmpresa = direccionEmpresa;
-	}
-
-	public String getComunaEmpresa() {
-		return comunaEmpresa;
-	}
-
-	public void setComunaEmpresa(String comunaEmpresa) {
-		this.comunaEmpresa = comunaEmpresa;
-	}
-
-	public String getTituloProfesional() {
-		return tituloProfesional;
-	}
-
-	public void setTituloProfesional(String tituloProfesional) {
-		this.tituloProfesional = tituloProfesional;
-	}
-
-	public String getFechaIngresoProfesional() {
-		return fechaIngresoProfesional;
-	}
-
-	public void setFechaIngresoProfesional(String fechaIngresoProfesional) {
-		this.fechaIngresoProfesional = fechaIngresoProfesional;
-	}
-
+    public String getFechaIngresoProfesional() { return fechaIngresoProfesional; }
+    public void setFechaIngresoProfesional(String fechaIngresoProfesional) { this.fechaIngresoProfesional = fechaIngresoProfesional; }
 }

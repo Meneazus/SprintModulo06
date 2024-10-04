@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-    xmlns:tx="http://www.springframework.org/schema/tx"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
-        http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           https://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           https://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/data/jpa
+           https://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+           http://www.springframework.org/schema/tx
+           https://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- Configuración de la Base de Datos -->
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
         <!-- Driver -->
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
 
@@ -23,28 +28,23 @@
         <!-- Contraseña de Acceso -->
         <property name="password" value="root" />
 
-		<property name="connectionProperties">
-			<props>
-				<prop key="removeAbandoned">true</prop>
-				<prop key="removeAbandonedTimeout">60</prop> <!-- Tiempo en segundos antes de cerrar conexiones abandonadas -->
-				<prop key="logAbandoned">true</prop> <!-- Para habilitar el registro de conexiones abandonadas -->
-			</props>
-		</property>
-        
+        <!-- Configuración del pool de conexiones -->
+        <property name="removeAbandonedOnBorrow" value="true" />
+        <property name="removeAbandonedTimeout" value="60" />
+        <property name="logAbandoned" value="true" />
     </bean>
-    
+
     <!-- Agregar RestTemplate al Proyecto -->
     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
-    
 
     <!-- Configuración de JPA -->
     <bean id="entityManagerFactory"
-        class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <!-- Referencia la datasource previamente configurado -->
         <property name="dataSource" ref="dataSource" />
 
         <!-- Especificar qué paquete contiene los modelos -->
-        <property name="packagesToScan" value="cl.grupo02.sprintFinal.model" />
+        <property name="packagesToScan" value="cl.grupo02.sprintFinal.model.entity" />
 
         <!-- Vendor Adapter -->
         <property name="jpaVendorAdapter">
@@ -54,16 +54,19 @@
         <!-- Propiedades JPA -->
         <property name="jpaProperties">
             <props>
-                <!-- Dialecto > https://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/session-configuration.html -->
+                <!-- Dialecto -->
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop>
 
                 <!-- Mostrar consultas SQL (depuración) -->
                 <prop key="hibernate.show_sql">true</prop>
 
-                <!-- Usar comentarios SQL. Permite ver los valores utilizados en las consultas -->
-                <prop key="use_sql_comments">true</prop>
+                <!-- Formatear las consultas SQL -->
+                <prop key="hibernate.format_sql">true</prop>
+
+                <!-- Usar comentarios SQL -->
+                <prop key="hibernate.use_sql_comments">true</prop>
                 
-                <!-- Propiedad para actualizar las tablas automáticamente en la base de datos -->
+                <!-- Actualizar tablas automáticamente en la base de datos -->
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
                 
             </props>
@@ -76,12 +79,12 @@
     </bean>
 
     <!-- Habilitar la búsqueda de componentes en el proyecto -->
-	<context:component-scan base-package="cl.grupo02.sprintFinal.model" />
-	
+    <context:component-scan base-package="cl.grupo02.sprintFinal" />
+    
     <!-- Configuración del Administrador de Transacciones -->
     <tx:annotation-driven transaction-manager="transactionManager" />
 
     <!-- Configuración de los Repositorios -->
-	<jpa:repositories base-package="cl.grupo02.sprintFinal.repository" />
+    <jpa:repositories base-package="cl.grupo02.sprintFinal.repository" />
 
 </beans>

@@ -1,18 +1,19 @@
 package cl.grupo02.sprintFinal.model.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "clientes")
-public class Cliente extends Usuario {
+public class Cliente{
 
-	/*
-	 * @Id
-	 * 
-	 * @GeneratedValue(strategy = GenerationType.IDENTITY) private int idCliente; //
-	 * Clave primaria en la tabla clientes
-	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer idCliente;
+
+	@OneToOne
+	@JoinColumn(name = "idUsuario")
+	private Usuario usuario;
 
 	private String nombreEmpresa;
 	private String rutEmpresa;
@@ -26,10 +27,11 @@ public class Cliente extends Usuario {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Cliente(String nombreEmpresa, String rutEmpresa, String telefonoEmpresa, String correoEmpresa,
-			String direccionEmpresa, String comunaEmpresa) {
+	public Cliente(Integer idCliente, Usuario usuario, String nombreEmpresa, String rutEmpresa, String telefonoEmpresa,
+			String correoEmpresa, String direccionEmpresa, String comunaEmpresa) {
 		super();
-
+		this.idCliente = idCliente;
+		this.usuario = usuario;
 		this.nombreEmpresa = nombreEmpresa;
 		this.rutEmpresa = rutEmpresa;
 		this.telefonoEmpresa = telefonoEmpresa;
@@ -38,17 +40,20 @@ public class Cliente extends Usuario {
 		this.comunaEmpresa = comunaEmpresa;
 	}
 
-	public Cliente(String nombreUsuario, String apellidoUsuario, String nickname, String contrasena, String runUsuario,
-			String correoUsuario, String telefonoUsuario, String tipoUsuario, String nombreEmpresa, String rutEmpresa,
-			String telefonoEmpresa, String correoEmpresa, String direccionEmpresa, String comunaEmpresa) {
-		super(nombreUsuario, apellidoUsuario, nickname, contrasena, runUsuario, correoUsuario, telefonoUsuario,
-				tipoUsuario);
-		this.nombreEmpresa = nombreEmpresa;
-		this.rutEmpresa = rutEmpresa;
-		this.telefonoEmpresa = telefonoEmpresa;
-		this.correoEmpresa = correoEmpresa;
-		this.direccionEmpresa = direccionEmpresa;
-		this.comunaEmpresa = comunaEmpresa;
+	public Integer getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(Integer idCliente) {
+		this.idCliente = idCliente;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getNombreEmpresa() {

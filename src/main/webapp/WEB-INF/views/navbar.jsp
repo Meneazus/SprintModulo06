@@ -1,137 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page import="org.springframework.security.core.Authentication"%>
-<%@ page
-	import="org.springframework.security.core.context.SecurityContextHolder"%>
-<%@ page import="org.springframework.security.core.GrantedAuthority"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="es" data-bs-theme="dark">
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="res/css/estilo.css">
-
+    <meta charset="UTF-8">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tu archivo de estilos personalizado -->
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/estilo.css">
 </head>
-
-<%
-Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-boolean isCliente = false;
-boolean isAdmin = false;
-
-if (auth != null && auth.isAuthenticated()) {
-	for (GrantedAuthority authority : auth.getAuthorities()) {
-		if (authority.getAuthority().equals("CLIENTE")) {
-	isCliente = true;
-		}
-		if (authority.getAuthority().equals("ADMIN")) {
-	isAdmin = true;
-		}
-	}
-}
-%>
-
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <!-- Marca de la aplicación -->
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/">Prevención Segura</a>
+            <!-- Botón para dispositivos móviles -->
+            <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Enlaces de navegación -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <!-- Enlace siempre visible -->
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/">Inicio</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+			          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Capacitaciones</a>
+			          <ul class="dropdown-menu">
+			            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/capacitaciones">Listar Capacitaciones</a></li>
+			            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/capacitaciones/nueva">Crear Capacitación</a></li>
+			          </ul>
+			        </li>
 
-			<a class="navbar-brand" href="./">Prevención Segura</a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarNav"
-				aria-controls="navbarNav" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
+                    <!-- Enlaces directos -->
 
+                     <li class="nav-item dropdown">
+			          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuarios</a>
+			          <ul class="dropdown-menu">
+			            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/usuarios">Listar Usuarios</a></li>
+			            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/usuarios/crear">Crear Usuario</a></li>
+			            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/usuarios">Editar Usuarios</a></li>
+			          </ul>
+			        </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/contacto">Contacto</a>
+                    </li>
+                    <!-- Botón de Login -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav ms-auto">
-					<li class="nav-item"><a class="nav-link" aria-current="page"
-						href="./">Inicio</a></li>
-					<%
-					if (session.getAttribute("SPRING_SECURITY_CONTEXT") != null) {
-					%>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#"
-						id="navbarDropdownListar" role="button" data-bs-toggle="dropdown"
-						aria-expanded="false">Listar</a> <%
- }
- %>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdownListar">
-							<%
-							if (isCliente) {
-							%>
-							<li><a class="dropdown-item" href="obtenerCapacitacion">Listar
-									Capacitación</a></li>
-							<%
-							}
-							%>
-							<%
-							if (isAdmin) {
-							%>
-							<li><a class="dropdown-item" href="listarUsuarios">Listar
-									Usuarios</a></li>
-							<%
-							}
-							%>
-
-						</ul></li>
-
-					<!-- Mostrar la opción "Contacto" solo para usuarios con rol CLIENTE -->
-					<%
-					if (isCliente) {
-					%>
-					<li class="nav-item"><a class="nav-link" href="contacto">Contacto</a></li>
-					<%
-					}
-					%>
-
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCrear" role="button" data-bs-toggle="dropdown" aria-expanded="false">Crear</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdownCrear">
-							<li><a class="dropdown-item" href="crearCapacitacion">Crear Capacitación</a></li>
-							<li><a class="dropdown-item" href="crearUsuario">Crear Usuario</a></li>
-						</ul>
-					</li>
-					
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownEditar" role="button" data-bs-toggle="dropdown" aria-expanded="false">Editar</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdownEditar">
-							<li><a class="dropdown-item" href="editarUsuario">Editar Usuarios</a></li>
-							<li><a class="dropdown-item" href="editarClientes">Editar Clientes</a></li>
-							<li><a class="dropdown-item" href="editarProfesionales">Editar Profesionales</a></li>
-						</ul>
-					</li>
-					
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownListar" role="button" data-bs-toggle="dropdown" aria-expanded="false">Listar</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdownListar">
-							<li><a class="dropdown-item" href="obtenerCapacitacion">Listar Capacitaciones</a></li>
-							<li><a class="dropdown-item" href="listarUsuarios">Listar Usuarios</a></li>
-						</ul>
-					</li>
-				
-					<li class="nav-item invisible-item"> <a class="nav-link" href="#">..............</a></li>
-					
-					<%
-					if (session.getAttribute("SPRING_SECURITY_CONTEXT") != null) {
-					%>
-					<!-- Botón de Logout -->
-					<li class="nav-item"><a class="nav-link" href="logout">Logout</a></li>
-
-					<%
-					} else {
-					%>
-					<li class="nav-item"><a class="nav-link" href="login">Login</a></li>
-					<%
-					}
-					%>
-
-
-				</ul>
-			</div>
-		</div>
-	</nav>
-
+    <!-- Contenido de la página -->
 </body>
 </html>

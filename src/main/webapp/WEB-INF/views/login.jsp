@@ -33,7 +33,7 @@
 										de usuario y tu contraseña</p>
 
 									<!-- Formulario de inicio de sesión -->
-									<form action="/grupal08/login" method="post">
+									<form action="/sprintFinal/login" method="post">
 
 										<div data-mdb-input-init class="form-outline form-white mb-4">
 											<input type="text" id="username" name="username"

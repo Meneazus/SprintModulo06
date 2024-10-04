@@ -1,39 +1,66 @@
 package cl.grupo02.sprintFinal.model.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-@Table(name = "administrativos")  // Corregido a plural
-public class Administrativo extends Usuario {
+@Table(name = "administrativos")
+public class Administrativo{
+
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idAdministrativo;
+
+    // Clave foránea a Usuario
+    @OneToOne
+    @JoinColumn(name = "idUsuario")
+    private Usuario usuario;
 
     private String areaAdministrativo;
     private String experienciaPrevia;
 
+    // Constructores
     public Administrativo() {
         super();
     }
 
-    public Administrativo(String nombreUsuario, String apellidoUsuario, String runUsuario, String correoUsuario,
-                          String telefonoUsuario, String tipoUsuario, String areaAdministrativo, String experienciaPrevia) {
-        super(nombreUsuario, apellidoUsuario, runUsuario, correoUsuario, telefonoUsuario, tipoUsuario);
+    public Administrativo(Integer idAdministrativo, Usuario usuario, String areaAdministrativo, String experienciaPrevia) {
+        this.idAdministrativo = idAdministrativo;
+        this.usuario = usuario;
         this.areaAdministrativo = areaAdministrativo;
         this.experienciaPrevia = experienciaPrevia;
     }
 
-    public String getAreaAdministrativo() {
-        return areaAdministrativo;
-    }
+	public Integer getIdAdministrativo() {
+		return idAdministrativo;
+	}
 
-    public void setAreaAdministrativo(String areaAdministrativo) {
-        this.areaAdministrativo = areaAdministrativo;
-    }
+	public void setIdAdministrativo(Integer idAdministrativo) {
+		this.idAdministrativo = idAdministrativo;
+	}
 
-    public String getExperienciaPrevia() {
-        return experienciaPrevia;
-    }
+	public Usuario getUsuario() {
+		return usuario;
+	}
 
-    public void setExperienciaPrevia(String experienciaPrevia) {
-        this.experienciaPrevia = experienciaPrevia;
-    }
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getAreaAdministrativo() {
+		return areaAdministrativo;
+	}
+
+	public void setAreaAdministrativo(String areaAdministrativo) {
+		this.areaAdministrativo = areaAdministrativo;
+	}
+
+	public String getExperienciaPrevia() {
+		return experienciaPrevia;
+	}
+
+	public void setExperienciaPrevia(String experienciaPrevia) {
+		this.experienciaPrevia = experienciaPrevia;
+	}
+
 }
