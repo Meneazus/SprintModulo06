@@ -6,14 +6,28 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.ui.Model;
 
+/**
+ * Controlador para gestionar la página de inicio.
+ * 
+ * @author Ariel Alfaro
+ * @author Bastian Muñoz
+ * @author Bastian Espinosa
+ * @author Joshua Montt
+ * @author Nicolas Gajardo
+ * @version 1.0
+ */
 @Controller
 public class HomeController {
 
-
     private static final Logger logger = LogManager.getLogger(HomeController.class);
 
+    /**
+     * Muestra la página de inicio.
+     *
+     * @param request la solicitud HTTP
+     * @return el nombre de la vista de inicio
+     */
     @GetMapping(path = {"/"})
     public String paginaInicio(HttpServletRequest request) {
         // Depuración
@@ -24,4 +38,3 @@ public class HomeController {
     }
 
 }
-    

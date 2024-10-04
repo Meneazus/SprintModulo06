@@ -1,7 +1,6 @@
 package cl.grupo02.sprintFinal.model.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * Representa un administrativo en la organización.

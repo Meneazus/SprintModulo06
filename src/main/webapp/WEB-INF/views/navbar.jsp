@@ -29,7 +29,7 @@ boolean isProfesional = roles.contains("PROFESIONAL");
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="<c:url value='/'/>">Prevención Segura</a>
+            <a class="navbar-brand" href="<c:url value='/'/>">PrevenciÃ³n Segura</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -38,6 +38,7 @@ boolean isProfesional = roles.contains("PROFESIONAL");
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="<c:url value='/'/>">Inicio</a>
                     </li>
+
                     <c:if test="${isCliente}">
                         <li class="nav-item">
                             <a class="nav-link" href="<c:url value='/contacto'/>">Contacto</a>
@@ -46,7 +47,7 @@ boolean isProfesional = roles.contains("PROFESIONAL");
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Capacitaciones</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="<c:url value='/capacitaciones'/>">Listar Capacitaciones</a></li>
-                                <li><a class="dropdown-item" href="<c:url value='/capacitaciones/nueva'/>">Crear Capacitación</a></li>
+                                <li><a class="dropdown-item" href="<c:url value='/capacitaciones/nueva'/>">Crear CapacitaciÃ³n</a></li>
                             </ul>
                         </li>
                     </c:if>
@@ -93,6 +94,7 @@ boolean isProfesional = roles.contains("PROFESIONAL");
                             </li>
                         </c:otherwise>
                     </c:choose>
+
                 </ul>
             </div>
         </div>

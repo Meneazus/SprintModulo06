@@ -1,7 +1,5 @@
 package cl.grupo02.sprintFinal.controller;
 
-import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,18 @@ import cl.grupo02.sprintFinal.model.service.ClienteService;
 import cl.grupo02.sprintFinal.model.service.VisitaService;
 
 import javax.validation.Valid;
+import java.util.List;
 
+/**
+ * Controlador para gestionar las visitas.
+ * 
+ * @autor Ariel Alfaro
+ * @autor Bastian Muñoz
+ * @autor Bastian Espinosa
+ * @autor Joshua Montt
+ * @autor Nicolas Gajardo
+ * @version 1.0
+ */
 @Controller
 public class VisitaController {
 
@@ -31,7 +40,12 @@ public class VisitaController {
 
     private static final Logger logger = LogManager.getLogger(VisitaController.class);
 
-    // Mostrar lista de visitas (obtenidas desde la base de datos)
+    /**
+     * Lista todas las visitas.
+     *
+     * @param model el modelo para agregar atributos
+     * @return el nombre de la vista para listar las visitas
+     */
     @GetMapping("/obtenerVisita")
     public String listarVisitas(Model model) {
         // Obtener visitas con sus revisiones y clientes
@@ -42,7 +56,12 @@ public class VisitaController {
         return "obtenerVisita"; // Asegúrate de que el nombre de la vista coincide
     }
 
-    // Mostrar formulario para crear una visita
+    /**
+     * Muestra el formulario para crear una nueva visita.
+     *
+     * @param model el modelo para agregar atributos
+     * @return el nombre de la vista para crear una visita
+     */
     @GetMapping("/crearVisita")
     public String mostrarCrearVisita(Model model) {
         logger.info("Solicitud GET: /crearVisita");
@@ -57,7 +76,16 @@ public class VisitaController {
         return "crearVisita"; // Retorna la vista del formulario para crear una visita
     }
 
-    // Procesar la creación de una nueva visita
+    /**
+     * Procesa la creación de una nueva visita.
+     *
+     * @param visita el objeto de visita a crear
+     * @param bindingResult el resultado de la validación
+     * @param idCliente el identificador del cliente asociado
+     * @param model el modelo para agregar atributos
+     * @param redirectAttributes atributos para redirección
+     * @return redirige a la lista de visitas o muestra el formulario con errores
+     */
     @PostMapping("/crearVisita")
     public String crearVisita(@Valid Visita visita, 
                              BindingResult bindingResult, 
