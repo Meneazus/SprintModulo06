@@ -2,11 +2,11 @@
 ## Sistema de Información para Empresa de Asesorías en Prevención de Riesgos
 # Integrantes:
 
-- Ariel Alfaro
-- Bastian Espinosa
-- Nicolas Gajardo
-- Joshua Montt
-- Bastian Muñoz
+- Ariel Alfaro https://github.com/NeoAriel-code/sprintModulo6
+- Bastian Espinosa https://github.com/bastignacio/SprintFinalM6
+- Nicolas Gajardo https://github.com/Meneazus/SprintModulo06
+- Joshua Montt https://github.com/JmonttV/sprint-modulo-6
+- Bastian Muñoz https://github.com/Bmunozdiaz/SprintM6JAVA
 
 
 ## Índice
